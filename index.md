@@ -1,37 +1,58 @@
-## Welcome to GitHub Pages
+# Projects
 
-You can use the [editor on GitHub](https://github.com/jmtritch/portfolio/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## Web/App Development
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+- [FileMaker XML Sync](https://github.com/jmtritch/FileMaker_XML_Sync) - Sync between offline FileMaker databases using XML.  I developed this to collect data in the [FileMaker Go](https://www.filemaker.com/products/filemaker-go/) app on iPads in remote locations and sync the updates with a master system.
+- [FileMaker Edit Text Files](https://github.com/jmtritch/FileMaker_Edit_Text_Files) - Allows for native editing of text files stored in containers in FileMaker.  I developed this as part of the XML Sync above in order to natively export an XML file from within [FileMaker Go](https://www.filemaker.com/products/filemaker-go/), which does not allow plugins.
+- [Laravel/Vue.js Survey App](#) - Currently developing a scalable app for organizations to use for mobile monitoring and continuous evaluation.  The backend uses Laravel with an API interface and the front end uses Vue.js for the user interface.  This includes:
+    - Registering users and assigning permissions to the users
+    - Registering beneficiaries
+    - Tracking beneficiary inputs (equipment and field visits to beneficiaries)
+    - Tracking beneficiary results (outputs, outcomes, and impact) via surveys
+    - Enabling users to create unique surveys and conduct them with the beneficiaries
+    - Associating inputs and results with projects via tags
 
-### Markdown
+## Data Analysis
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Modeling
 
-```markdown
-Syntax highlighted code block
+#### Regression
 
-# Header 1
-## Header 2
-### Header 3
+- Simple Linear Regression
+- Multiple Linear Regression
+- Variable Selection (Stepwise Regression, Lasso, Elastic Net)
+- Logistic Regression
 
-- Bulleted
-- List
+#### Classification
 
-1. Numbered
-2. List
+- Support Vector Machine
+- K-Nearest Neighbors
 
-**Bold** and _Italic_ and `Code` text
+#### Clustering
 
-[Link](url) and ![Image](src)
-```
+- K-means
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### Change Detection
 
-### Jekyll Themes
+- CUSUM
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jmtritch/portfolio/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### Time Series
 
-### Support or Contact
+- Exponential Smoothing
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+#### Trees
+
+- Regression Tree
+- Random Forest
+
+#### Simulation
+
+- Airport
+
+#### Optimization
+
+- Budgeted Nutrition
+
+### Exploratory Data Analysis
+
+- Does access to teachers and books correlate with student performance on National Examinations in Tanzania?
