@@ -96,7 +96,7 @@ idc$test
     Training indices:
 
 
-<ol class=list-inline>
+<ol>
 	<li>1</li>
 	<li>2</li>
 	<li>3</li>
