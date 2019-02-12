@@ -16,7 +16,7 @@
 
 #### R
 
-- [`split_indices()`](functions/split_indices) - Splits indices into randomized training, validation, and testing sets
+- [`split_indices()`](functions/split_indices) - Helps quickly split a dataset into training, validation, and testing sets.
 
 ### Modeling
 
