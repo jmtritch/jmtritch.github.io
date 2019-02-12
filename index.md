@@ -1,5 +1,3 @@
-# Projects
-
 ## Web/App Development
 
 - [FileMaker XML Sync](https://github.com/jmtritch/FileMaker_XML_Sync) - Sync between offline FileMaker databases using XML.  I developed this to collect data in the [FileMaker Go](https://www.filemaker.com/products/filemaker-go/) app on iPads in remote locations and sync the updates with a master system.
@@ -13,6 +11,12 @@
     - Associating inputs and results with projects via tags
 
 ## Data Analysis
+
+### Custom Functions
+
+#### R
+
+- [`split_indices()`](functions/split_indices) - Splits indices into randomized training, validation, and testing sets
 
 ### Modeling
 
