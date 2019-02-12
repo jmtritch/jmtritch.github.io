@@ -92,10 +92,13 @@ idc$train
 cat('Testing indices:')
 idc$test
 ```
+
 `Training indices:`
+
 `1 2 3 6 7 8 9 10 11 13 14 15 17 18 19 20 22 23 24 25 26 29 30 31 32 37 38 39 41 43 44 46 47 48 49`
 
 `Testing indices:`
+
 `4 5 12 16 21 27 28 33 34 35 36 40 42 45 50`
 
 ### Split into Training, Validation, and Testing Sets
@@ -124,10 +127,15 @@ idc$test
 ```
 
 `Training indices:`
+
 `2 6 7 10 12 13 14 15 17 19 21 22 23 25 26 27 29 30 32 34 36 37 38 39 40 43 44 46 48 49`
-`Validation indices:``
+
+`Validation indices:`
+
 `1 5 11 16 18 24 28 31 42 47`
+
 `Testing indices:`
+
 `3 4 8 9 20 33 35 41 45 50`
 
 ### Combine Training and Validation
@@ -150,4 +158,5 @@ idc_trval
 ```
 
 `Combined Training and Validation indices:`
+
 `1 2 5 6 7 10 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27 28 29 30 31 32 34 36 37 38 39 40 42 43 44 46 47 48 49`
