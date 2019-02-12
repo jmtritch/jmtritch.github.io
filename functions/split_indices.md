@@ -3,7 +3,6 @@
 
 This function helps to easily split your dataset into training, validation and testing sets.
 
-
 ```R
 # Purpose: Splits the indices of a dataset into training, validation, and
 #          testing sets
@@ -24,13 +23,13 @@ split_indices = function(nrows, trn_pct, val_pct=0.0, seed=NULL) {
     # Get the training indices
     trn_idc = sort(sample(1:nrows, floor(nrows*trn_pct)))
     # Get the non-training indices
-    neg_trn_idc = setdiff(seq_len(nrows), trn_idc)
+    non_trn_idc = setdiff(seq_len(nrows), trn_idc)
     # Get the validation indices
-    val_idc = sort(sample(neg_trn_idc, floor(nrows*val_pct)))
+    val_idc = sort(sample(non_trn_idc, floor(nrows*val_pct)))
     # Get the remaining testing indices
-    tst_idc = setdiff(neg_trn_idc, val_idc)
+    tst_idc = setdiff(non_trn_idc, val_idc)
     # Return the list of sets
-    return( list('train'=trn_idc, 
+    return( list('train'=trn_idc,
                  'valid'=val_idc,
                  'trval'=sort(c(trn_idc, val_idc)),
                  'test'= tst_idc) )
@@ -62,7 +61,7 @@ head(dummy_df, 3)
 
 
 <table>
-<thead><tr><th scope=col>a</th><th scope=col>b</th><th scope=col>c</th><th scope=col>d</th></tr></thead>
+<thead><tr><th>a</th><th>b</th><th>c</th><th>d</th></tr></thead>
 <tbody>
 	<tr><td>424</td><td>467</td><td>589</td><td>503</td></tr>
 	<tr><td>466</td><td>  1</td><td>188</td><td> 79</td></tr>
@@ -323,5 +322,3 @@ idc_trval
 	<li>48</li>
 	<li>49</li>
 </ol>
-
-
