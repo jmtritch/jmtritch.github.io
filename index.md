@@ -1,6 +1,6 @@
 [Web/App Development](#web) | [Data Analysis](#data) | [Exploratory](#eda) | [Modeling](#model) | [Custom Functions](#functions)
 
-## Web/App Development <a name="web"></a>
+## Web/App Development <a name="web"></a> [^Top](#top)
 
 - [FileMaker XML Sync](https://github.com/jmtritch/FileMaker_XML_Sync) - Sync between offline FileMaker databases using XML.  I developed this to collect data in the [FileMaker Go](https://www.filemaker.com/products/filemaker-go/) app on iPads in remote locations and sync the updates with a master system.
 - [FileMaker Edit Text Files](https://github.com/jmtritch/FileMaker_Edit_Text_Files) - Allows for native editing of text files stored in containers in FileMaker.  I developed this as part of the XML Sync above in order to natively export an XML file from within [FileMaker Go](https://www.filemaker.com/products/filemaker-go/), which does not allow plugins.
@@ -12,13 +12,13 @@
     - Enabling users to create unique surveys and conduct them with the beneficiaries
     - Associating inputs and results with projects via tags
 
-## Data Analysis <a name="data"></a>
+## Data Analysis <a name="data"></a> [^Top](#top)
 
-### Exploratory Data Analysis (EDA) <a name="eda"></a>
+### Exploratory Data Analysis (EDA) <a name="eda"></a> [^Top](#top)
 
 - Does access to teachers and books correlate with student performance on National Examinations in Tanzania?
 
-### Modeling
+### Modeling <a name="model"></a>  [^Top](#top)
 
 #### Regression
 
@@ -57,7 +57,7 @@
 
 - Budgeted Nutrition
 
-### Custom Functions <a name="functions"></a>
+### Custom Functions <a name="functions"></a> [^Top](#top)
 
 #### R
 
