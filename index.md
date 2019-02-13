@@ -1,10 +1,10 @@
-[Web/App Development](#web)
+[Web/App Development](#web) | [Data Analysis](#data) | [Exploratory](#eda) | [Modeling](#model) | [Custom Functions](#functions)
 
 ## Web/App Development <a name="web"></a>
 
 - [FileMaker XML Sync](https://github.com/jmtritch/FileMaker_XML_Sync) - Sync between offline FileMaker databases using XML.  I developed this to collect data in the [FileMaker Go](https://www.filemaker.com/products/filemaker-go/) app on iPads in remote locations and sync the updates with a master system.
 - [FileMaker Edit Text Files](https://github.com/jmtritch/FileMaker_Edit_Text_Files) - Allows for native editing of text files stored in containers in FileMaker.  I developed this as part of the XML Sync above in order to natively export an XML file from within [FileMaker Go](https://www.filemaker.com/products/filemaker-go/), which does not allow plugins.
-- [Laravel/Vue.js Survey App](#) - Currently developing a scalable app for organizations to use for mobile monitoring and continuous evaluation.  The backend uses Laravel with an API interface and the front end uses Vue.js for the user interface.  This includes:
+- [Laravel/Vue.js Survey App](#) - Currently developing a scalable app for organizations to use for mobile monitoring and continuous evaluation.  The backend uses Laravel with an API inte)rface and the front end uses Vue.js for the user interface.  This includes:
     - Registering users and assigning permissions to the users
     - Registering beneficiaries
     - Tracking beneficiary inputs (equipment and field visits to beneficiaries)
@@ -12,13 +12,11 @@
     - Enabling users to create unique surveys and conduct them with the beneficiaries
     - Associating inputs and results with projects via tags
 
-## Data Analysis
+## Data Analysis <a name="data"></a>
 
-### Custom Functions
+### Exploratory Data Analysis (EDA) <a name="eda"></a>
 
-#### R
-
-- [`split_indices()`](functions/split_indices) - Helps quickly split a dataset into training, validation, and testing sets.
+- Does access to teachers and books correlate with student performance on National Examinations in Tanzania?
 
 ### Modeling
 
@@ -59,6 +57,8 @@
 
 - Budgeted Nutrition
 
-### Exploratory Data Analysis
+### Custom Functions <a name="functions"></a>
 
-- Does access to teachers and books correlate with student performance on National Examinations in Tanzania?
+#### R
+
+- [`split_indices()`](functions/split_indices) - Helps quickly split a dataset into training, validation, and testing sets.
