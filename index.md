@@ -12,13 +12,13 @@
     - Enabling users to create unique surveys and conduct them with the beneficiaries
     - Associating inputs and results with projects via tags
 
-## Data Analysis <a name="data"></a> [Top](#top)
+## Data Analysis <a name="data"></a> <sup>[Top](#top)</sup>
 
-### Exploratory Data Analysis (EDA) <a name="eda"></a> [Top](#top)
+### Exploratory Data Analysis (EDA) <a name="eda"></a> <sup>[Top](#top)</sup>
 
 - Does access to teachers and books correlate with student performance on National Examinations in Tanzania?
 
-### Modeling <a name="model"></a>  [Top](#top)
+### Modeling <a name="model"></a> <sup>[Top](#top)</sup>
 
 #### Regression
 
@@ -57,7 +57,7 @@
 
 - Budgeted Nutrition
 
-### Custom Functions <a name="functions"></a> [Top](#top)
+### Custom Functions <a name="functions"></a> <sup>[Top](#top)</sup>
 
 #### R
 
