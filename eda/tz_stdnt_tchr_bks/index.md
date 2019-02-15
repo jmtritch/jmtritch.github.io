@@ -1,5 +1,5 @@
 
-# Is there a relationship between average Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?
+# Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?
 
 The Tanzanian Government has a variety of education, health and agriculture datasets available at their [Basic Statistics Portal](http://http://opendata.go.tz/).  Of interest for this exploratory data analysis are four datasets, namely:
 
