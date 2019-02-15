@@ -444,26 +444,26 @@ We can see this directly by creating a multiple linear regression model of these
 model = lm(AVG_GPA ~ TEACHERS+BOOKS+PTR+BPR, df_schools)
 summary(model)
 ```
->Call:
->lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)
->
->Residuals:
->     Min       1Q   Median       3Q      Max
->-2.19564 -0.16012  0.02275  0.19165  0.68787
->
->Coefficients:
->              Estimate Std. Error t value Pr(>|t|)    
->(Intercept)  4.328e+00  2.877e-02 150.410  < 2e-16 ***
->TEACHERS    -3.649e-03  5.972e-04  -6.111 1.14e-09 ***
->BOOKS        1.326e-05  6.576e-06   2.017   0.0438 *  
->PTR         -9.194e-06  1.030e-03  -0.009   0.9929    
->BPR         -4.062e-03  2.030e-03  -2.001   0.0455 *  
->---
->Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
->
->Residual standard error: 0.2779 on 2608 degrees of freedom
->Multiple R-squared:  0.0223,	Adjusted R-squared:  0.0208
->F-statistic: 14.87 on 4 and 2608 DF,  p-value: 5.105e-12
+Call:
+lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-2.19564 -0.16012  0.02275  0.19165  0.68787
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  4.328e+00  2.877e-02 150.410  < 2e-16 ***
+TEACHERS    -3.649e-03  5.972e-04  -6.111 1.14e-09 ***
+BOOKS        1.326e-05  6.576e-06   2.017   0.0438 *  
+PTR         -9.194e-06  1.030e-03  -0.009   0.9929    
+BPR         -4.062e-03  2.030e-03  -2.001   0.0455 *  
+---
+Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2779 on 2608 degrees of freedom
+Multiple R-squared:  0.0223,	Adjusted R-squared:  0.0208
+F-statistic: 14.87 on 4 and 2608 DF,  p-value: 5.105e-12
 
 From the R-squared value, only 2% of the variation in AVG_GPA is explained by the predictors TEACHERS, BOOKS, PTR, and BPR.
 
