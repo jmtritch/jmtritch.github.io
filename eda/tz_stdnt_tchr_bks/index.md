@@ -41,11 +41,9 @@ cat('CSEE data points:', nrow(df_csee))
 </tbody>
 </table>
 <div class="output">
-
-```
+<pre>
 CSEE data points: 4360
-```
-
+</pre>
 </div>
 
 ```R
@@ -63,9 +61,9 @@ cat('Teachers data points:', nrow(df_ptr))
 </tbody>
 </table>
 <div class="output">
-```
+<pre>
 Teachers data points: 3600
-```
+</pre>
 </div>
 
 ```R
@@ -83,9 +81,9 @@ cat('Teachers number of rows:', nrow(df_qptr))
 </tbody>
 </table>
 <div class="output">
-```
+<pre>
 Teachers number of rows: 3600
-```
+</pre>
 </div>
 
 ```R
@@ -102,9 +100,9 @@ cat('Books number of rows:', nrow(df_pbr))
 </tbody>
 </table>
 <div class="output">
-```
+<pre>
 Books number of rows: 3632
-```
+</pre>
 </div>
 
 Most of the datasets do not contain the same number of schools, which should be okay for this exploratory analysis.  When we merge them we will lose some data points, but if we find a strong relationship we can come back to find ways to include matching schools that may have not have merged automatically.  Prior to merging, though, let's make sure that there are no duplicate schools listed in any of the datasets.
@@ -115,9 +113,9 @@ duplicates = df_csee$CODE
 cat('CSEE duplicates:', df_csee[duplicated(df_csee)])
 ```
 <div class="output">
-```
+<pre>
 CSEE duplicates:
-```
+</pre>
 </div>
 
 ```R
@@ -128,9 +126,9 @@ duplicates = df_ptr$UNQ.SCH
 cat('Qualified teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 <div class="output">
-```
+<pre>
 Qualified teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA
-```
+</pre>
 </div>
 
 ```R
@@ -141,9 +139,9 @@ duplicates = df_qptr$UNQ.SCH
 cat('All teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 <div class="output">
-```
+<pre>
 All teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA
-```
+</pre>
 </div>
 
 ```R
@@ -154,9 +152,9 @@ duplicates = df_pbr$UNQ.SCH
 cat('Textbooks duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 <div class="output">
-```
+<pre>
 Textbooks duplicate schools:
-```
+</pre>
 </div>
 
 Only the PTR and QTR datasets have a single school listed twice.  Let's remove the duplicate entry.
@@ -170,10 +168,10 @@ cat('Qualified teachers number of rows:', nrow(df_qptr))
 cat('\nAll teachers number of rows:', nrow(df_ptr))
 ```
 <div class="output">
-```
+<pre>
 Qualified teachers number of rows: 3599
 All teachers number of rows: 3599
-```
+</pre>
 </div>
 
 ### Syncing Column Names
@@ -242,9 +240,9 @@ cat('Total Schools:', nrow(df_schools))
 </tbody>
 </table>
 <div class="output">
-```
+<pre>
 Total Schools: 2670
-```
+</pre>
 </div>
 
 After merging all four datasets, we remain with 2670 schools.  As we are performing cursory exploratory data analysis, this should be large enough to determine if there are correlations between the teacher and book attributes and school performance on national examinations.
@@ -259,9 +257,9 @@ duplicates = df_tmp$UNQ.SCH
 cat('Duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 <div class="output">
-```
+<pre>
 Duplicate schools:
-```
+</pre>
 </div>
 
 ### Creating Interaction Terms
@@ -295,7 +293,7 @@ head(df_schools,2)
 summary(df_schools)
 ```
 <div class="output">
-```
+<pre>
 CODE                   REGION            WARD      SCHOOL.NAME       
 Length:2670        TANGA      : 179            : 188   Length:2670       
 Class :character   KILIMANJARO: 174   CHANIKA  :  10   Class :character  
@@ -319,7 +317,7 @@ Median :  1890   Median :15.68   Median :15.68   Median :  5.360
 Mean   :  2270   Mean   :16.83   Mean   :16.83   Mean   :  6.261  
 3rd Qu.:  2826   3rd Qu.:20.66   3rd Qu.:20.66   3rd Qu.:  7.500  
 Max.   :159666   Max.   :67.67   Max.   :67.67   Max.   :341.170  
-```
+</pre>
 </div>
 
 There appears to be at least one spurious outlier in the total books attribute.  While we could run Grubbs' Test to identify outliers, there is not a need since this is just exploratory.  In the summary above we can see that the maximum record is 159666 books for a single school.  This is almost certainly from incorrectly entered value(s) within the dataset.  Let's remove any book totals over 20,000.
@@ -407,7 +405,7 @@ sw_results <- shapiro.test(df_schools$BPR)
 cat('\nBPR Shapiro-Wilk p-value:', sw_results$p.value)
 ```
 <div class="output">
-```
+<pre>
 AVG_GPA Shapiro-Wilk p-value: 4.787988e-31
 ENROLMENT Shapiro-Wilk p-value: 1.089899e-43
 TEACHERS Shapiro-Wilk p-value: 1.572752e-45
@@ -416,7 +414,7 @@ BOOKS Shapiro-Wilk p-value: 1.976691e-40
 PTR Shapiro-Wilk p-value: 9.180728e-34
 QPTR Shapiro-Wilk p-value: 9.180728e-34
 BPR Shapiro-Wilk p-value: 2.943717e-53
-```
+</pre>
 </div>
 
 According to the Shapiro-Wilk test, none of the attributes follow a normal distribution.  There are ways to reshape the data, but let's leave the attributes alone for now.
@@ -499,7 +497,7 @@ model = lm(AVG_GPA ~ TEACHERS+BOOKS+PTR+BPR, df_schools)
 summary(model)
 ```
 <div class="output">
-```
+<pre>
 Call:
 lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)
 
@@ -520,7 +518,7 @@ Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 �
 Residual standard error: 0.2779 on 2608 degrees of freedom
 Multiple R-squared:  0.0223,	Adjusted R-squared:  0.0208
 F-statistic: 14.87 on 4 and 2608 DF,  p-value: 5.105e-12
-```
+</pre>
 </div>
 
 From the R-squared value, only 2% of the variation in AVG_GPA is explained by the predictors TEACHERS, BOOKS, PTR, and BPR.
@@ -532,7 +530,7 @@ model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
 ````
 <div class="output">
-```
+<pre>
 Call:
 lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
 
@@ -581,7 +579,7 @@ Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 �
 Residual standard error: 0.2489 on 2582 degrees of freedom
 Multiple R-squared:  0.2234,	Adjusted R-squared:  0.2144
 F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16<
-```
+</pre>
 </div>
 
 ## Conclusion
