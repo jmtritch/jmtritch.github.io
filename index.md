@@ -17,13 +17,11 @@
     - Enabling users to create unique surveys and conduct them with the beneficiaries
     - Associating inputs and results with projects via tags
 
-## Data Analysis <a name="data"></a> <sup>[Top](#top)</sup>
-
-### Exploratory Data Analysis (EDA) <a name="eda"></a> <sup>[Top](#top)</sup>
+## Exploratory Data Analysis (EDA) <a name="eda"></a> <sup>[Top](#top)</sup>
 
 - [Is there a relationship between Tanzanian average school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
 
-### Modeling <a name="model"></a> <sup>[Top](#top)</sup>
+## Modeling <a name="model"></a> <sup>[Top](#top)</sup>
 
 #### Regression
 
