@@ -16,7 +16,7 @@
 
 ### Exploratory Data Analysis (EDA) <a name="eda"></a> <sup>[Top](#top)</sup>
 
-- [Is there a relationship between Tanzanian average school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks.md)
+- [Is there a relationship between Tanzanian average school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
 
 ### Modeling <a name="model"></a> <sup>[Top](#top)</sup>
 
