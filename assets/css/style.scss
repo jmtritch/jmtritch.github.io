@@ -2,16 +2,3 @@
 ---
 
 @import "{{ site.theme }}";
-
-// Code
-pre .outpt {
-    padding: 0.8rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    color: $code-text-color;
-    word-wrap: normal;
-    background-color: #ffffff;
-    border: solid 1px $border-color;
-    border-radius: 0.3rem;
-}
