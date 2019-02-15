@@ -93,7 +93,7 @@ corrplot(cor(credit_df), method = "number")
 ```
 ![png](output_9_0.png)
 
-In the correlation matrix, we can see that similar to the scatterplot analysis, A8, A9, and A10 all correlate fairly well with R1.  A15 does not appear to correlate very well with R1, as I thought above.
+In the correlation matrix, we can see that similar to the scatterplot analysis, A8, A9, and A10 all correlate fairly well with R1.  A15 does not appear to correlate very well with R1, contradicting what I inferred from the visualizations above.
 
 ## Splitting the Data
 
