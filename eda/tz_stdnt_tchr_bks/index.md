@@ -447,8 +447,8 @@ anova(model)
 <table>
 <thead><tr><th></th><th>Df</th><th>Sum Sq</th><th>Mean Sq</th><th>F value</th><th>Pr(&gt;F)</th></tr></thead>
 <tbody>
-	<tr><th scope=row>REGION</th><td>  25         </td><td> 39.8802     </td><td>1.59520807   </td><td>24.84854     </td><td>3.893503e-102</td></tr>
-	<tr><th scope=row>Residuals</th><td>2587         </td><td>166.0783     </td><td>0.06419724   </td><td>      NA     </td><td>           NA</td></tr>
+	<tr><th>REGION</th><td>  25         </td><td> 39.8802     </td><td>1.59520807   </td><td>24.84854     </td><td>3.893503e-102</td></tr>
+	<tr><th>Residuals</th><td>2587         </td><td>166.0783     </td><td>0.06419724   </td><td>      NA     </td><td>           NA</td></tr>
 </tbody>
 </table>
 
