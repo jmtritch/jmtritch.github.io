@@ -1,10 +1,15 @@
-<p align="center">[Web/App Development](#webapp) \| [Data Analysis](#data) \| [Exploratory](#eda) \| [Modeling](#model) \| [Custom Functions](#functions)</p>
+<div id="menu">
+    <a href="#webapp">Web/App Development</a> |
+    <a href="#eda">Exploratory Data Analysis</a> |
+    <a href="#model">Modeling</a> |
+    <a href="#functions">Custom Functions</a>
+</div>
 
 ## Web/App Development <a name="web"></a> <sup>[Top](#top)</sup>
 
 - [FileMaker XML Sync](https://github.com/jmtritch/FileMaker_XML_Sync){:target="blank"} - Sync between offline FileMaker databases using XML.  I developed this to collect data in the [FileMaker Go](https://www.filemaker.com/products/filemaker-go/) app on iPads in remote locations and sync the updates with a master system.
 - [FileMaker Edit Text Files](https://github.com/jmtritch/FileMaker_Edit_Text_Files){:target="blank"} - Allows for native editing of text files stored in containers in FileMaker.  I developed this as part of the XML Sync above in order to natively export an XML file from within [FileMaker Go](https://www.filemaker.com/products/filemaker-go/), which does not allow plugins.
-- [Laravel/Vue.js Survey App](#) - Currently developing a scalable app for organizations to use for mobile monitoring and continuous evaluation.  The backend uses Laravel with an API inte)rface and the front end uses Vue.js for the user interface.  This includes:
+- [Laravel/Vue.js Survey App](#) - Currently developing a scalable app for organizations to use for mobile monitoring and continuous evaluation.  The backend uses Laravel with an API interface and the front end uses Vue.js for the user interface.  This includes:
     - Registering users and assigning permissions to the users
     - Registering beneficiaries
     - Tracking beneficiary inputs (equipment and field visits to beneficiaries)
