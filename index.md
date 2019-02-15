@@ -1,4 +1,4 @@
-<div id='menu'>[Web/App Development](#webapp) \| [Data Analysis](#data) \| [Exploratory](#eda) \| [Modeling](#model) \| [Custom Functions](#functions)</center>
+<div id='menu'>[Web/App Development](#webapp) \| [Data Analysis](#data) \| [Exploratory](#eda) \| [Modeling](#model) \| [Custom Functions](#functions)</div>
 
 ## Web/App Development <a name="web"></a> <sup>[Top](#top)</sup>
 
