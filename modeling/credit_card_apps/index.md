@@ -385,4 +385,4 @@ Accuracy:  87.88 %
 
 ## Conclusions
 
-With an accuracy of 87.88% on the testing set, we can see that the svm model generalizes quite well.  Surprisingly, the accuracy improved by about 3% as compared to the validation set.
+With an accuracy of 87.88% on the testing set, we can see that the svm model generalizes quite well.  Surprisingly, the accuracy improved by about 3% over the validation set.
