@@ -1,4 +1,4 @@
-[Web/App Development](#web) | [Data Analysis](#data) | [Exploratory](#eda) | [Modeling](#model) | [Custom Functions](#functions)
+[Web/App Development](#web) \| [Data Analysis](#data) \| [Exploratory](#eda) \| [Modeling](#model) \| [Custom Functions](#functions)
 
 ## Web/App Development <a name="web"></a> <sup>[Top](#top)</sup>
 
