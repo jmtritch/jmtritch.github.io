@@ -41,9 +41,11 @@ cat('CSEE data points:', nrow(df_csee))
 </tbody>
 </table>
 <div class="output">
+
 ```
 CSEE data points: 4360
 ```
+
 </div>
 
 ```R
