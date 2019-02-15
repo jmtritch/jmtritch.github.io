@@ -33,17 +33,14 @@ df_csee = read.csv('2016CSEE-RANKINGWITHLOC.csv', header=TRUE,
 head(df_csee, 2)
 cat('CSEE data points:', nrow(df_csee))
 ```
-###### Output:
-<table>
+><table>
 <thead><tr><th>CODE</th><th>NAME</th><th>REGION</th><th>DISTRICT</th><th>WARD</th><th>OWNERSHIP</th><th>LATITUDE</th><th>LONGITUDE</th><th>PASS_RATE</th><th>CHANGE_PREVIOUS_YEAR_PASS_RATE</th><th>AVG_GPA</th><th>CHANGE_PREVIOUS_YEAR_GPA</th><th>RANK</th><th>YEAR_OF_RESULT</th><th>MORE_THAN_40</th><th>NATIONAL_RANK_ALL</th><th>REGIONAL_RANK_ALL</th><th>DISTRICT_RANK_ALL</th></tr></thead>
 <tbody>
 	<tr><td>S0189                             </td><td>FEZA BOYS' SECONDARY SCHOOL       </td><td>DAR ES SALAAM                     </td><td>KINONDONI                         </td><td>KUNDUCHI                          </td><td>PRIVATE                           </td><td>-6.73805                          </td><td>39.2281                           </td><td>100                               </td><td>0                                 </td><td>1.4769                            </td><td>0.1514                            </td><td>YES                               </td><td>1                                 </td><td>2016                              </td><td>1                                 </td><td>1                                 </td><td>1                                 </td></tr>
 	<tr><td>S0239                             </td><td>ST. FRANCIS GIRLS SECONDARY SCHOOL</td><td>MBEYA                             </td><td>MBEYA (M)                         </td><td>MBALIZI RD                        </td><td>PRIVATE                           </td><td>-8.90662                          </td><td>33.4503                           </td><td>100                               </td><td>0                                 </td><td>1.4896                            </td><td>0.0062                            </td><td>YES                               </td><td>2                                 </td><td>2016                              </td><td>2                                 </td><td>1                                 </td><td>1                                 </td></tr>
 </tbody>
 </table>
-```
 CSEE data points: 4360
-```
 
 ```R
 # Read in the PTR data
@@ -52,17 +49,14 @@ df_ptr = read.csv('PTR-in-Gvt-Secondary-Schools-2016.csv', header=TRUE,
 head(df_ptr, 2)
 cat('Teachers data points:', nrow(df_ptr))
 ```
-###### Output:
-<table>
+><table>
 <thead><tr><th>REGION</th><th>COUNCIL</th><th>WARD</th><th>SCHOOL.NAME</th><th>ENROLMENT</th><th>TEACHERS</th><th>PTR</th></tr></thead>
 <tbody>
 	<tr><td>ARUSHA   </td><td>Arusha CC</td><td>Kimandolu</td><td>KIMASEKI </td><td>1205     </td><td>53       </td><td>23       </td></tr>
 	<tr><td>ARUSHA   </td><td>Arusha CC</td><td>Kimandolu</td><td>SUYE     </td><td> 918     </td><td>39       </td><td>24       </td></tr>
 </tbody>
 </table>
-```
 Teachers data points: 3600
-```
 
 ```R
 # Read in the QPTR data
