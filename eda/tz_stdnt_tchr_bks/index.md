@@ -472,55 +472,55 @@ Even running a full model using nearly all predictors improves the R-squared val
 ```R
 model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
-```
->Call:
->lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
->
->Residuals:
->     Min       1Q   Median       3Q      Max
->-2.34632 -0.12222  0.02372  0.16089  0.88265
->
->Coefficients: (2 not defined because of singularities)
->                      Estimate Std. Error t value Pr(>|t|)    
->(Intercept)          4.408e+00  4.356e-02 101.205  < 2e-16 ***
->REGIONDAR ES SALAAM  1.022e-01  3.886e-02   2.630 0.008599 **
->REGIONDODOMA         2.503e-02  3.633e-02   0.689 0.490896    
->REGIONGEITA         -1.350e-01  3.996e-02  -3.380 0.000737 ***
->REGIONIRINGA        -2.677e-01  3.906e-02  -6.854 8.98e-12 ***
->REGIONKAGERA        -1.871e-01  3.679e-02  -5.084 3.95e-07 ***
->REGIONKATAVI        -1.474e-01  5.573e-02  -2.646 0.008206 **
->REGIONKIGOMA        -1.866e-01  3.848e-02  -4.849 1.32e-06 ***
->REGIONKILIMANJARO   -2.258e-02  3.482e-02  -0.648 0.516778    
->REGIONLINDI          1.292e-01  4.090e-02   3.159 0.001604 **
->REGIONMANYARA       -2.071e-01  4.083e-02  -5.074 4.18e-07 ***
->REGIONMARA           1.328e-02  3.687e-02   0.360 0.718733    
->REGIONMBEYA          3.914e-02  3.633e-02   1.077 0.281403    
->REGIONMOROGORO       1.306e-01  3.576e-02   3.652 0.000266 ***
->REGIONMTWARA         3.743e-02  3.914e-02   0.956 0.339075    
->REGIONMWANZA        -9.397e-02  3.523e-02  -2.668 0.007684 **
->REGIONNJOMBE        -2.613e-01  4.181e-02  -6.250 4.77e-10 ***
->REGIONPWANI          1.919e-01  4.115e-02   4.662 3.29e-06 ***
->REGIONRUKWA         -7.642e-02  4.351e-02  -1.757 0.079118 .  
->REGIONRUVUMA        -1.774e-01  3.822e-02  -4.641 3.64e-06 ***
->REGIONSHINYANGA     -9.059e-02  4.129e-02  -2.194 0.028338 *  
->REGIONSIMIYU        -2.849e-01  4.501e-02  -6.330 2.88e-10 ***
->REGIONSINGIDA       -4.106e-02  3.894e-02  -1.055 0.291701    
->REGIONSONGWE         1.591e-03  5.580e-02   0.029 0.977260    
->REGIONTABORA        -1.311e-01  3.829e-02  -3.425 0.000625 ***
->REGIONTANGA          8.363e-02  3.517e-02   2.378 0.017489 *  
->ENROLMENT            6.632e-05  5.836e-05   1.137 0.255843    
->Q.TEACHERS          -5.363e-03  9.374e-04  -5.722 1.18e-08 ***
->TEACHERS                    NA         NA      NA       NA    
->BOOKS                1.027e-05  6.357e-06   1.615 0.106427    
->QPTR                -1.096e-03  1.350e-03  -0.812 0.416840    
->PTR                         NA         NA      NA       NA    
->BPR                 -3.156e-03  1.886e-03  -1.673 0.094390 .  
->---
->Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
->
->Residual standard error: 0.2489 on 2582 degrees of freedom
->Multiple R-squared:  0.2234,	Adjusted R-squared:  0.2144
->F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16
+````
+<pre>Call:
+lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-2.34632 -0.12222  0.02372  0.16089  0.88265
+
+Coefficients: (2 not defined because of singularities)
+                      Estimate Std. Error t value Pr(>|t|)    
+(Intercept)          4.408e+00  4.356e-02 101.205  < 2e-16 ***
+REGIONDAR ES SALAAM  1.022e-01  3.886e-02   2.630 0.008599 **
+REGIONDODOMA         2.503e-02  3.633e-02   0.689 0.490896    
+REGIONGEITA         -1.350e-01  3.996e-02  -3.380 0.000737 ***
+REGIONIRINGA        -2.677e-01  3.906e-02  -6.854 8.98e-12 ***
+REGIONKAGERA        -1.871e-01  3.679e-02  -5.084 3.95e-07 ***
+REGIONKATAVI        -1.474e-01  5.573e-02  -2.646 0.008206 **
+REGIONKIGOMA        -1.866e-01  3.848e-02  -4.849 1.32e-06 ***
+REGIONKILIMANJARO   -2.258e-02  3.482e-02  -0.648 0.516778    
+REGIONLINDI          1.292e-01  4.090e-02   3.159 0.001604 **
+REGIONMANYARA       -2.071e-01  4.083e-02  -5.074 4.18e-07 ***
+REGIONMARA           1.328e-02  3.687e-02   0.360 0.718733    
+REGIONMBEYA          3.914e-02  3.633e-02   1.077 0.281403    
+REGIONMOROGORO       1.306e-01  3.576e-02   3.652 0.000266 ***
+REGIONMTWARA         3.743e-02  3.914e-02   0.956 0.339075    
+REGIONMWANZA        -9.397e-02  3.523e-02  -2.668 0.007684 **
+REGIONNJOMBE        -2.613e-01  4.181e-02  -6.250 4.77e-10 ***
+REGIONPWANI          1.919e-01  4.115e-02   4.662 3.29e-06 ***
+REGIONRUKWA         -7.642e-02  4.351e-02  -1.757 0.079118 .  
+REGIONRUVUMA        -1.774e-01  3.822e-02  -4.641 3.64e-06 ***
+REGIONSHINYANGA     -9.059e-02  4.129e-02  -2.194 0.028338 *  
+REGIONSIMIYU        -2.849e-01  4.501e-02  -6.330 2.88e-10 ***
+REGIONSINGIDA       -4.106e-02  3.894e-02  -1.055 0.291701    
+REGIONSONGWE         1.591e-03  5.580e-02   0.029 0.977260    
+REGIONTABORA        -1.311e-01  3.829e-02  -3.425 0.000625 ***
+REGIONTANGA          8.363e-02  3.517e-02   2.378 0.017489 *  
+ENROLMENT            6.632e-05  5.836e-05   1.137 0.255843    
+Q.TEACHERS          -5.363e-03  9.374e-04  -5.722 1.18e-08 ***
+TEACHERS                    NA         NA      NA       NA    
+BOOKS                1.027e-05  6.357e-06   1.615 0.106427    
+QPTR                -1.096e-03  1.350e-03  -0.812 0.416840    
+PTR                         NA         NA      NA       NA    
+BPR                 -3.156e-03  1.886e-03  -1.673 0.094390 .  
+---
+Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2489 on 2582 degrees of freedom
+Multiple R-squared:  0.2234,	Adjusted R-squared:  0.2144
+F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16</pre>
 
 ## Conclusion
 
