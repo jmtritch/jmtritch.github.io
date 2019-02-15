@@ -3,10 +3,10 @@
 
 The Tanzanian Government has a variety of education, health and agriculture datasets available at their [Basic Statistics Portal](http://http://opendata.go.tz/).  Of interest for this exploratory data analysis are four datasets, namely:
 
-* [2016 Certificate of Secondary Education Exam Results](http://opendata.go.tz/dataset/national-form-four-examinations-schools-ranking-with-location) - Form IV examination results for all ordinary level secondary schools in Tanzania.  We are interested in the AVG_GPA attribute, which corresponds to the average division results of the examinations.  The division results range from 1 to 5, with 1 being the best and 5 being the worst.
-* [2016 Qualified Teacher to Pupil Ratio for Government Secondary Schools](http://opendata.go.tz/dataset/qualified) - Contains the total number of qualified teachers for each school.  We are interested in the total number of students and qualified teachers from this dataset.
-* [2016 Pupil to Teacher Ratio for Government Secondary Schools](http://opendata.go.tz/dataset/uwiano-wa-mwalimu-kwa-wanafunzi-kwa-shule-za-sekondari-za-serikali-2016) - Contains the total number of teachers for each school.  We are interested in the total number of students and teachers from this dataset.
-* [2018 Pupil to Book Ratio for Secondary Schools](http://opendata.go.tz/dataset/pbr-secondary-2018) - We are interested in the total number of books from this data set.
+* [2016 Certificate of Secondary Education Exam Results](http://opendata.go.tz/dataset/national-form-four-examinations-schools-ranking-with-location) - Form IV examination results for all ordinary level secondary schools in Tanzania.  We are interested in the AVG_GPA attribute, which corresponds to the average division results of the examinations.  The division results range from 1 to 5, with 1 being the best and 5 being the worst.  [Mirrored here.](2016CSEE-RANKINGWITHLOC.csv)
+* [2016 Qualified Teacher to Pupil Ratio for Government Secondary Schools](http://opendata.go.tz/dataset/qualified) - Contains the total number of qualified teachers for each school.  We are interested in the total number of students and qualified teachers from this dataset.  [Mirrored here.](QPTR-Governmet-Secondary-Schools-2016.csv)
+* [2016 Pupil to Teacher Ratio for Government Secondary Schools](http://opendata.go.tz/dataset/uwiano-wa-mwalimu-kwa-wanafunzi-kwa-shule-za-sekondari-za-serikali-2016) - Contains the total number of teachers for each school.  We are interested in the total number of students and teachers from this dataset.  [Mirrored here.](PTR-in-Gvt-Secondary-Schools-2016.csv)
+* [2018 Pupil to Book Ratio for Secondary Schools](http://opendata.go.tz/dataset/pbr-secondary-2018) - We are interested in the total number of books from this data set.  [Mirrored here.](PBRSecondary-Education.csv)
 
 ## Data Cleaning
 
@@ -42,7 +42,7 @@ cat('CSEE data points:', nrow(df_csee))
 </tbody>
 </table>
 
-`CSEE data points: 4360`
+<pre>CSEE data points: 4360</pre>
 
 
 ```R
@@ -61,7 +61,7 @@ cat('Teachers data points:', nrow(df_ptr))
 </tbody>
 </table>
 
-`Teachers data points: 3600`
+<pre>Teachers data points: 3600</pre>
 
 ```R
 # Read in the QPTR data
@@ -79,7 +79,7 @@ cat('Teachers number of rows:', nrow(df_qptr))
 </tbody>
 </table>
 
-`Teachers number of rows: 3600`
+<pre>Teachers number of rows: 3600</pre>
 
 ```R
 # Read in the PBR data
@@ -96,7 +96,7 @@ cat('Books number of rows:', nrow(df_pbr))
 </tbody>
 </table>
 
-`Books number of rows: 3632`
+<pre>Books number of rows: 3632</pre>
 
 Most of the datasets do not contain the same number of schools, which should be okay for this exploratory analysis.  When we merge them we will lose some data points, but if we find a strong relationship we can come back to find ways to include matching schools that may have not have merged automatically.  Prior to merging, though, let's make sure that there are no duplicate schools listed in any of the datasets.
 
@@ -106,7 +106,7 @@ duplicates = df_csee$CODE
 cat('CSEE duplicates:', df_csee[duplicated(df_csee)])
 ```
 
-`CSEE duplicates:`
+<pre>CSEE duplicates:</pre>
 
 ```R
 # Check for duplicates in PTR
@@ -116,7 +116,7 @@ duplicates = df_ptr$UNQ.SCH
 cat('Qualified teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 
-`Qualified teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA`
+<pre>Qualified teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA</pre>
 
 ```R
 # Check for duplicates in QPTR
@@ -126,7 +126,7 @@ duplicates = df_qptr$UNQ.SCH
 cat('All teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 
-`All teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA`
+<pre>All teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA</pre>
 
 
 ```R
@@ -137,7 +137,7 @@ duplicates = df_pbr$UNQ.SCH
 cat('Textbooks duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 
-`Textbooks duplicate schools:`
+<pre>Textbooks duplicate schools:</pre>
 
 Only the PTR and QTR datasets have a single school listed twice.  Let's remove the duplicate entry.
 
@@ -151,8 +151,8 @@ cat('Qualified teachers number of rows:', nrow(df_qptr))
 cat('\nAll teachers number of rows:', nrow(df_ptr))
 ```
 
-`Qualified teachers number of rows: 3599`
-`All teachers number of rows: 3599`
+<pre>Qualified teachers number of rows: 3599
+All teachers number of rows: 3599</pre>
 
 ### Syncing Column Names
 
@@ -221,7 +221,7 @@ cat('Total Schools:', nrow(df_schools))
 </tbody>
 </table>
 
-`Total Schools: 2670`
+<pre>Total Schools: 2670</pre>
 
 After merging all four datasets, we remain with 2670 schools.  As we are performing cursory exploratory data analysis, this should be large enough to determine if there are correlations between the teacher and book attributes and school performance on national examinations.
 
@@ -235,7 +235,7 @@ duplicates = df_tmp$UNQ.SCH
 cat('Duplicate schools:', duplicates[duplicated(duplicates)])
 ```
 
-`Duplicate schools:`
+<pre>Duplicate schools:</pre>
 
 ### Creating Interaction Terms
 
@@ -270,29 +270,29 @@ summary(df_schools)
 ```
 
 
-`     CODE                   REGION            WARD      SCHOOL.NAME       `
-`     Length:2670        TANGA      : 179            : 188   Length:2670       `
-`     Class :character   KILIMANJARO: 174   CHANIKA  :  10   Class :character  `
-`     Mode  :character   MWANZA     : 158   KIBAMBA  :   5   Mode  :character  `
-`                        DODOMA     : 148   KITUNDA  :   5                     `
-`                        MOROGORO   : 144   MAKUYUNI :   5                     `
-`                        MARA       : 134   MALANGALI:   5                     `
-`                        (Other)    :1733   (Other)  :2452                     `
-`        AVG_GPA        ENROLMENT        Q.TEACHERS        TEACHERS     `
-`     Min.   :1.965   Min.   :  29.0   Min.   :  3.00   Min.   :  3.00  `
-`     1st Qu.:4.080   1st Qu.: 222.0   1st Qu.: 15.25   1st Qu.: 15.25  `
-`     Median :4.262   Median : 342.0   Median : 22.00   Median : 22.00  `
-`     Mean   :4.240   Mean   : 416.9   Mean   : 25.26   Mean   : 25.26  `
-`     3rd Qu.:4.434   3rd Qu.: 525.8   3rd Qu.: 31.00   3rd Qu.: 31.00  `
-`     Max.   :4.924   Max.   :2633.0   Max.   :216.00   Max.   :216.00  `
-`
-`         BOOKS             QPTR            PTR             BPR         `
-`     Min.   :     0   Min.   : 2.54   Min.   : 2.54   Min.   :  0.000  `
-`     1st Qu.:  1204   1st Qu.:11.62   1st Qu.:11.62   1st Qu.:  3.890  `
-`     Median :  1890   Median :15.68   Median :15.68   Median :  5.360  `
-`     Mean   :  2270   Mean   :16.83   Mean   :16.83   Mean   :  6.261  `
-`     3rd Qu.:  2826   3rd Qu.:20.66   3rd Qu.:20.66   3rd Qu.:  7.500  `
-`     Max.   :159666   Max.   :67.67   Max.   :67.67   Max.   :341.170  `
+<pre>     CODE                   REGION            WARD      SCHOOL.NAME       
+     Length:2670        TANGA      : 179            : 188   Length:2670       
+     Class :character   KILIMANJARO: 174   CHANIKA  :  10   Class :character  
+     Mode  :character   MWANZA     : 158   KIBAMBA  :   5   Mode  :character  
+                        DODOMA     : 148   KITUNDA  :   5                     
+                        MOROGORO   : 144   MAKUYUNI :   5                     
+                        MARA       : 134   MALANGALI:   5                     
+                        (Other)    :1733   (Other)  :2452                     
+        AVG_GPA        ENROLMENT        Q.TEACHERS        TEACHERS     
+     Min.   :1.965   Min.   :  29.0   Min.   :  3.00   Min.   :  3.00  
+     1st Qu.:4.080   1st Qu.: 222.0   1st Qu.: 15.25   1st Qu.: 15.25  
+     Median :4.262   Median : 342.0   Median : 22.00   Median : 22.00  
+     Mean   :4.240   Mean   : 416.9   Mean   : 25.26   Mean   : 25.26  
+     3rd Qu.:4.434   3rd Qu.: 525.8   3rd Qu.: 31.00   3rd Qu.: 31.00  
+     Max.   :4.924   Max.   :2633.0   Max.   :216.00   Max.   :216.00  
+
+         BOOKS             QPTR            PTR             BPR         
+     Min.   :     0   Min.   : 2.54   Min.   : 2.54   Min.   :  0.000  
+     1st Qu.:  1204   1st Qu.:11.62   1st Qu.:11.62   1st Qu.:  3.890  
+     Median :  1890   Median :15.68   Median :15.68   Median :  5.360  
+     Mean   :  2270   Mean   :16.83   Mean   :16.83   Mean   :  6.261  
+     3rd Qu.:  2826   3rd Qu.:20.66   3rd Qu.:20.66   3rd Qu.:  7.500  
+     Max.   :159666   Max.   :67.67   Max.   :67.67   Max.   :341.170  </pre>
 
 There appears to be at least one spurious outlier in the total books attribute.  While we could run Grubbs' Test to identify outliers, there is not a need since this is just exploratory.  In the summary above we can see that the maximum record is 159666 books for a single school.  This is almost certainly from incorrectly entered value(s) within the dataset.  Let's remove any book totals over 20,000.
 
@@ -382,14 +382,14 @@ sw_results <- shapiro.test(df_schools$BPR)
 cat('\nBPR Shapiro-Wilk p-value:', sw_results$p.value)
 ```
 
-`    AVG_GPA Shapiro-Wilk p-value: 4.787988e-31`
-`    ENROLMENT Shapiro-Wilk p-value: 1.089899e-43`
-`    TEACHERS Shapiro-Wilk p-value: 1.572752e-45`
-`    Q.TEACHERS Shapiro-Wilk p-value: 1.572752e-45`
-`    BOOKS Shapiro-Wilk p-value: 1.976691e-40`
-`    PTR Shapiro-Wilk p-value: 9.180728e-34`
-`    QPTR Shapiro-Wilk p-value: 9.180728e-34`
-`    BPR Shapiro-Wilk p-value: 2.943717e-53`
+<pre>AVG_GPA Shapiro-Wilk p-value: 4.787988e-31
+ENROLMENT Shapiro-Wilk p-value: 1.089899e-43
+TEACHERS Shapiro-Wilk p-value: 1.572752e-45
+Q.TEACHERS Shapiro-Wilk p-value: 1.572752e-45
+BOOKS Shapiro-Wilk p-value: 1.976691e-40
+PTR Shapiro-Wilk p-value: 9.180728e-34
+QPTR Shapiro-Wilk p-value: 9.180728e-34
+BPR Shapiro-Wilk p-value: 2.943717e-53</pre>
 
 According to the Shapiro-Wilk test, none of the attributes follow a normal distribution.  There are ways to reshape the data, but let's leave the attributes alone for now.
 
@@ -475,26 +475,26 @@ model = lm(AVG_GPA ~ TEACHERS+BOOKS+PTR+BPR, df_schools)
 summary(model)
 ```
 
-`    Call:`
-`    lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)`
-``
-`    Residuals:`
-`         Min       1Q   Median       3Q      Max`
-`    -2.19564 -0.16012  0.02275  0.19165  0.68787`
-`
-`    Coefficients:`
-`                  Estimate Std. Error t value Pr(>|t|)    `
-`    (Intercept)  4.328e+00  2.877e-02 150.410  < 2e-16 ***`
-`    TEACHERS    -3.649e-03  5.972e-04  -6.111 1.14e-09 ***`
-`    BOOKS        1.326e-05  6.576e-06   2.017   0.0438 *  `
-`    PTR         -9.194e-06  1.030e-03  -0.009   0.9929    `
-`    BPR         -4.062e-03  2.030e-03  -2.001   0.0455 *  `
-`    ---`
-`    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1`
-``
-`    Residual standard error: 0.2779 on 2608 degrees of freedom`
-`    Multiple R-squared:  0.0223,	Adjusted R-squared:  0.0208`
-`    F-statistic: 14.87 on 4 and 2608 DF,  p-value: 5.105e-12`
+<pre>    Call:
+    lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)
+
+    Residuals:
+         Min       1Q   Median       3Q      Max
+    -2.19564 -0.16012  0.02275  0.19165  0.68787
+
+    Coefficients:
+                  Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)  4.328e+00  2.877e-02 150.410  < 2e-16 ***
+    TEACHERS    -3.649e-03  5.972e-04  -6.111 1.14e-09 ***
+    BOOKS        1.326e-05  6.576e-06   2.017   0.0438 *  
+    PTR         -9.194e-06  1.030e-03  -0.009   0.9929    
+    BPR         -4.062e-03  2.030e-03  -2.001   0.0455 *  
+    ---
+    Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+    Residual standard error: 0.2779 on 2608 degrees of freedom
+    Multiple R-squared:  0.0223,	Adjusted R-squared:  0.0208
+    F-statistic: 14.87 on 4 and 2608 DF,  p-value: 5.105e-12</pre>
 
 From the R-squared value, only 2% of the variation in AVG_GPA is explained by the predictors TEACHERS, BOOKS, PTR, and BPR.
 
@@ -505,8 +505,7 @@ model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
 ```
 
-```
-    Call:
+<pre>    Call:
     lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
 
     Residuals:
@@ -549,12 +548,11 @@ summary(model)
     PTR                         NA         NA      NA       NA    
     BPR                 -3.156e-03  1.886e-03  -1.673 0.094390 .  
     ---
-    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+    Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
     Residual standard error: 0.2489 on 2582 degrees of freedom
     Multiple R-squared:  0.2234,	Adjusted R-squared:  0.2144
-    F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16
-```
+    F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16</pre>
 
 ## Conclusion
 
