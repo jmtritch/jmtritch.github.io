@@ -3,11 +3,6 @@
 
 @import "{{ site.theme }}";
 
-.output {
-    background-color: #fff;
-    color: red;
-}
-
-.highlight {
-    background-color: #fff;
-}
+// Code
+$code-bg-color: #ffffff !default;
+$code-text-color: #ffffff !default;
