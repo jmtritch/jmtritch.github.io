@@ -34,8 +34,7 @@
 
 #### Classification
 
-- Support Vector Machine
-- K-Nearest Neighbors
+- [Predicting Credit Card Application Approvals](modeling/credit_card_apps)
 
 #### Clustering
 
