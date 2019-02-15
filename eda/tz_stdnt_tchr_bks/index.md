@@ -473,7 +473,7 @@ Even running a full model using nearly all predictors improves the R-squared val
 model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
 ````
-<code>Call:
+<pre class="output">Call:
 lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
 
 Residuals:
