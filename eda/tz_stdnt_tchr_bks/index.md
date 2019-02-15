@@ -33,7 +33,7 @@ df_csee = read.csv('2016CSEE-RANKINGWITHLOC.csv', header=TRUE,
 head(df_csee, 2)
 cat('CSEE data points:', nrow(df_csee))
 ```
-
+###### Output:
 <table>
 <thead><tr><th>CODE</th><th>NAME</th><th>REGION</th><th>DISTRICT</th><th>WARD</th><th>OWNERSHIP</th><th>LATITUDE</th><th>LONGITUDE</th><th>PASS_RATE</th><th>CHANGE_PREVIOUS_YEAR_PASS_RATE</th><th>AVG_GPA</th><th>CHANGE_PREVIOUS_YEAR_GPA</th><th>RANK</th><th>YEAR_OF_RESULT</th><th>MORE_THAN_40</th><th>NATIONAL_RANK_ALL</th><th>REGIONAL_RANK_ALL</th><th>DISTRICT_RANK_ALL</th></tr></thead>
 <tbody>
@@ -41,12 +41,9 @@ cat('CSEE data points:', nrow(df_csee))
 	<tr><td>S0239                             </td><td>ST. FRANCIS GIRLS SECONDARY SCHOOL</td><td>MBEYA                             </td><td>MBEYA (M)                         </td><td>MBALIZI RD                        </td><td>PRIVATE                           </td><td>-8.90662                          </td><td>33.4503                           </td><td>100                               </td><td>0                                 </td><td>1.4896                            </td><td>0.0062                            </td><td>YES                               </td><td>2                                 </td><td>2016                              </td><td>2                                 </td><td>1                                 </td><td>1                                 </td></tr>
 </tbody>
 </table>
-
-#### Output:
 ```
 CSEE data points: 4360
 ```
-
 
 ```R
 # Read in the PTR data
@@ -55,7 +52,7 @@ df_ptr = read.csv('PTR-in-Gvt-Secondary-Schools-2016.csv', header=TRUE,
 head(df_ptr, 2)
 cat('Teachers data points:', nrow(df_ptr))
 ```
-
+###### Output:
 <table>
 <thead><tr><th>REGION</th><th>COUNCIL</th><th>WARD</th><th>SCHOOL.NAME</th><th>ENROLMENT</th><th>TEACHERS</th><th>PTR</th></tr></thead>
 <tbody>
@@ -63,8 +60,6 @@ cat('Teachers data points:', nrow(df_ptr))
 	<tr><td>ARUSHA   </td><td>Arusha CC</td><td>Kimandolu</td><td>SUYE     </td><td> 918     </td><td>39       </td><td>24       </td></tr>
 </tbody>
 </table>
-
-#### Output:
 ```
 Teachers data points: 3600
 ```
@@ -76,7 +71,7 @@ df_qptr = read.csv('QPTR-Governmet-Secondary-Schools-2016.csv', header=TRUE,
 head(df_qptr, 2)
 cat('Teachers number of rows:', nrow(df_qptr))
 ```
-
+###### Output:
 <table>
 <thead><tr><th>REGION</th><th>COUNCIL</th><th>WARD</th><th>SCHOOL.NAME</th><th>ENROLMENT</th><th>TEACHERS</th><th>QPTR</th></tr></thead>
 <tbody>
@@ -84,8 +79,6 @@ cat('Teachers number of rows:', nrow(df_qptr))
 	<tr><td>ARUSHA   </td><td>Arusha CC</td><td>Kimandolu</td><td>SUYE     </td><td> 918     </td><td>39       </td><td>24       </td></tr>
 </tbody>
 </table>
-
-#### Output:
 ```
 Teachers number of rows: 3600
 ```
@@ -96,7 +89,7 @@ df_pbr = read.csv('PBRSecondary-Education.csv', header=TRUE, strip.white=TRUE)
 head(df_pbr, 2)
 cat('Books number of rows:', nrow(df_pbr))
 ```
-
+###### Output:
 <table>
 <thead><tr><th>Region</th><th>Council</th><th>Ward</th><th>School.Name</th><th>Number.of.Students.Basic.Mathematics.Form.1</th><th>Number.of.Students.Biology.Form.1</th><th>Number.of.Students.Chemistry.Form.1</th><th>Number.of.Students.Civics.Form.1</th><th>Number.of.Students.English.Language.Form.1</th><th>Number.of.Students.Geography.Form.1</th><th>⋯</th><th>PBR.Biology.Form.6</th><th>PBR.Chemistry.Form.6</th><th>PBR.Economics.Form.6</th><th>PBR.English.Language.Form.6</th><th>PBR.General.Studies.Form.6</th><th>PBR.Geography.Form.6</th><th>PBR.History.Form.6</th><th>PBR.Kiswahili.Form.6</th><th>PBR.Literature.in.English.Form.6</th><th>PBR.Physics.Form.6</th></tr></thead>
 <tbody>
@@ -104,8 +97,6 @@ cat('Books number of rows:', nrow(df_pbr))
 	<tr><td>ARUSHA  </td><td>Arusha  </td><td>Bwawani </td><td>OLOKII  </td><td>132     </td><td>132     </td><td>132     </td><td>132     </td><td>132     </td><td>132     </td><td>⋯       </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td><td>NA      </td></tr>
 </tbody>
 </table>
-
-#### Output:
 ```
 Books number of rows: 3632
 ```
@@ -117,8 +108,7 @@ Most of the datasets do not contain the same number of schools, which should be 
 duplicates = df_csee$CODE
 cat('CSEE duplicates:', df_csee[duplicated(df_csee)])
 ```
-
-#### Output:
+###### Output:
 ```
 CSEE duplicates:
 ```
@@ -130,8 +120,7 @@ df_ptr = df_ptr %>% unite(UNQ.SCH, REGION, COUNCIL, WARD, SCHOOL.NAME, remove = 
 duplicates = df_ptr$UNQ.SCH
 cat('Qualified teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
-
-#### Output:
+###### Output:
 ```
 Qualified teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA
 ```
@@ -143,12 +132,10 @@ df_qptr = df_ptr %>% unite(UNQ.SCH, REGION, COUNCIL, WARD, SCHOOL.NAME, remove =
 duplicates = df_qptr$UNQ.SCH
 cat('All teachers duplicate schools:', duplicates[duplicated(duplicates)])
 ```
-
-#### Output:
+###### Output:
 ```
 All teachers duplicate schools: GEITA_Geita_Lwenzera_LWEZELA
 ```
-
 
 ```R
 # Check for duplicates in PBR
@@ -157,14 +144,12 @@ df_pbr = df_pbr %>% unite(UNQ.SCH, Region, Council, Ward, School.Name, remove = 
 duplicates = df_pbr$UNQ.SCH
 cat('Textbooks duplicate schools:', duplicates[duplicated(duplicates)])
 ```
-
-#### Output:
+###### Output:
 ```
 Textbooks duplicate schools:
 ```
 
 Only the PTR and QTR datasets have a single school listed twice.  Let's remove the duplicate entry.
-
 
 ```R
 # Remove the duplicate rows
@@ -174,8 +159,7 @@ df_ptr = distinct(df_ptr, UNQ.SCH, .keep_all = TRUE)
 cat('Qualified teachers number of rows:', nrow(df_qptr))
 cat('\nAll teachers number of rows:', nrow(df_ptr))
 ```
-
-#### Output:
+###### Output:
 ```
 Qualified teachers number of rows: 3599
 All teachers number of rows: 3599
@@ -239,7 +223,7 @@ df_schools$CODE = as.character(df_schools$CODE)
 head(df_schools, 2)
 cat('Total Schools:', nrow(df_schools))
 ```
-
+###### Output:
 <table>
 <thead><tr><th>CODE</th><th>REGION</th><th>WARD</th><th>SCHOOL.NAME</th><th>AVG_GPA</th><th>ENROLMENT</th><th>Q.TEACHERS</th><th>TEACHERS</th><th>BOOKS</th></tr></thead>
 <tbody>
@@ -247,8 +231,6 @@ cat('Total Schools:', nrow(df_schools))
 	<tr><td>S0206   </td><td>MOROGORO</td><td>KILAKALA</td><td>KILAKALA</td><td>1.9917  </td><td>636     </td><td>71      </td><td>71      </td><td>4132    </td></tr>
 </tbody>
 </table>
-
-#### Output:
 ```
 Total Schools: 2670
 ```
@@ -264,8 +246,7 @@ df_tmp = df_schools %>% unite(UNQ.SCH, REGION, WARD, SCHOOL.NAME, remove = FALSE
 duplicates = df_tmp$UNQ.SCH
 cat('Duplicate schools:', duplicates[duplicated(duplicates)])
 ```
-
-#### Output:
+###### Output:
 ```
 Duplicate schools:
 ```
@@ -287,7 +268,7 @@ df_schools$BPR = round(df_schools$BOOKS / df_schools$ENROLMENT,2)
 
 head(df_schools,2)
 ```
-
+###### Output:
 <table>
 <thead><tr><th>CODE</th><th>REGION</th><th>WARD</th><th>SCHOOL.NAME</th><th>AVG_GPA</th><th>ENROLMENT</th><th>Q.TEACHERS</th><th>TEACHERS</th><th>BOOKS</th><th>QPTR</th><th>PTR</th><th>BPR</th></tr></thead>
 <tbody>
@@ -301,9 +282,7 @@ head(df_schools,2)
 ```R
 summary(df_schools)
 ```
-
-
-#### Output:
+###### Output:
 ```
      CODE                   REGION            WARD      SCHOOL.NAME       
      Length:2670        TANGA      : 179            : 188   Length:2670       
@@ -363,7 +342,7 @@ hst_tch = ggplot(data=df_schools, aes(Q.TEACHERS)) +
 # Grid them together
 plot_grid(hst_gpa, hst_pup, hst_tch, hst_qtch, ncol=2)
 ```
-
+###### Output:
 ![png](output_26_1.png)
 
 AVG GPA appears to be left skewed, and Pupils, Qualified Teachers, and Teachers appear to be right skewed.  The other thing to notice is that Qualified Teachers and Teachers have very similar distributions.  We will check for multicollinearity a little later.
@@ -388,7 +367,7 @@ hst_bpr=ggplot(data=df_schools, aes(BPR)) +
 # Grid them together
 plot_grid(hst_ptr, hst_qptr, hst_bks, hst_bpr, ncol=2)
 ```
-
+###### Output:
 ![png](output_28_1.png)
 
 We can see that books and all three interaction terms are right skewed.
@@ -396,7 +375,6 @@ We can see that books and all three interaction terms are right skewed.
 #### Shapiro-Wilk Test for Normality
 
 The Shapiro-Wilk Test can also test for normality.  Given the null hypothesis that the data are normally distributed, a low p-value will indicate that the data are not normally distributed.
-
 
 ```R
 # Run the Shapiro Tests
@@ -417,8 +395,7 @@ cat('\nQPTR Shapiro-Wilk p-value:', sw_results$p.value)
 sw_results <- shapiro.test(df_schools$BPR)
 cat('\nBPR Shapiro-Wilk p-value:', sw_results$p.value)
 ```
-
-#### Output:
+###### Output:
 ```
 AVG_GPA Shapiro-Wilk p-value: 4.787988e-31
 ENROLMENT Shapiro-Wilk p-value: 1.089899e-43
@@ -449,7 +426,7 @@ ggplot(df_schools, aes(x=REGION, y=AVG_GPA, color=REGION)) +
     xlab('Region') +
     ylab('Avg GPA')
 ```
-
+###### Output:
 ![png](output_33_1.png)
 
 Arusha and Morogoro have the top performing schools in our cleaned dataset.  Njombe and Iringa appear to have the best median scores.  Let's use ANOVA to see if the Regions have statistically different AVG_GPA values. The null hypothesis is that all of the means of the Regions are the same.  Let's see if at least one of the means of AVG_GPA for the Regions is different.
@@ -458,7 +435,7 @@ Arusha and Morogoro have the top performing schools in our cleaned dataset.  Njo
 model = lm(AVG_GPA ~ REGION, df_schools)
 anova(model)
 ```
-
+###### Output:
 <table>
 <thead><tr><th></th><th>Df</th><th>Sum Sq</th><th>Mean Sq</th><th>F value</th><th>Pr(&gt;F)</th></tr></thead>
 <tbody>
@@ -482,7 +459,7 @@ predictors = c('ENROLMENT', 'TEACHERS', 'Q.TEACHERS', 'BOOKS',
 # Plot the correlation matrix
 corrplot(cor(df_schools[predictors]), method = "number")
 ```
-
+###### Output:
 ![png](output_38_0.png)
 
 There is direct correlation between teachers and qualified teachers, which means that moving forward we can ignore one of them.  So let's ignore Q.TEACHERS and QPTR since nearly all schools have all or nearly all qualified teachers on staff.
@@ -500,7 +477,7 @@ options(repr.plot.width=8, repr.plot.height=5)
 ggpairs(df_schools[c('AVG_GPA','TEACHERS','BOOKS','PTR','BPR')],
         aes(alpha=0.1))
 ```
-
+###### Output:
 ![png](output_41_1.png)
 
 There appears to be very little correlation between AVG_GPA of schools and the predictors, TEACHERS, BOOKS, PTR, and BPR.  PTR has the greatest positive correlation at 0.05 and TEACHERS has the greatest negative correlation at -0.137.
@@ -513,8 +490,7 @@ We can see this directly by creating a multiple linear regression model of these
 model = lm(AVG_GPA ~ TEACHERS+BOOKS+PTR+BPR, df_schools)
 summary(model)
 ```
-
-#### Output:
+###### Output:
 ```
     Call:
     lm(formula = AVG_GPA ~ TEACHERS + BOOKS + PTR + BPR, data = df_schools)
@@ -546,8 +522,7 @@ Even running a full model using nearly all predictors improves the R-squared val
 model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
 ```
-
-#### Output:
+###### Output:
 ```
     Call:
     lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
