@@ -473,7 +473,7 @@ Even running a full model using nearly all predictors improves the R-squared val
 model = lm(AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, df_schools)
 summary(model)
 ````
-<pre>Call:
+<code>Call:
 lm(formula = AVG_GPA ~ . - CODE - WARD - SCHOOL.NAME, data = df_schools)
 
 Residuals:
@@ -520,7 +520,7 @@ Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 �
 
 Residual standard error: 0.2489 on 2582 degrees of freedom
 Multiple R-squared:  0.2234,	Adjusted R-squared:  0.2144
-F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16</pre>
+F-statistic: 24.76 on 30 and 2582 DF,  p-value: < 2.2e-16</code>
 
 ## Conclusion
 
