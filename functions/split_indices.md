@@ -46,7 +46,6 @@ split_indices(nrows, trn_pct, val_pct=0.0, seed=NULL)
 
 Let's create some dummy data first.
 
-
 ```R
 # Set the total number of rows for the dummy data frame
 nrows = 50
@@ -58,8 +57,6 @@ dummy_df = data.frame(a=sample(1:600,nrows,replace=TRUE),
 # Show the first three records of the dummy data frame
 head(dummy_df, 3)
 ```
-
-
 <table>
 <thead><tr><th>a</th><th>b</th><th>c</th><th>d</th></tr></thead>
 <tbody>
@@ -69,14 +66,11 @@ head(dummy_df, 3)
 </tbody>
 </table>
 
-
-
 ### Split into Training and Testing Sets
 
 To split a dataset into training and testing sets, you only specify the total number of rows in the data frame and the training percent.
 
 The testing percent is calculated as the remaining percent.
-
 
 ```R
 # Split 70% training 30% testing
@@ -92,21 +86,20 @@ idc$train
 cat('Testing indices:')
 idc$test
 ```
-
-`Training indices:`
-
-`1 2 3 6 7 8 9 10 11 13 14 15 17 18 19 20 22 23 24 25 26 29 30 31 32 37 38 39 41 43 44 46 47 48 49`
-
-`Testing indices:`
-
-`4 5 12 16 21 27 28 33 34 35 36 40 42 45 50`
+<div class="output">
+<pre>
+Training indices:
+1 2 3 6 7 8 9 10 11 13 14 15 17 18 19 20 22 23 24 25 26 29 30 31 32 37 38 39 41 43 44 46 47 48 49`
+Testing indices:
+4 5 12 16 21 27 28 33 34 35 36 40 42 45 50`
+</pre>
+</div>
 
 ### Split into Training, Validation, and Testing Sets
 
 To split a dataset into training, validation, and testing sets, you specify the total number of rows in the data frame, the training percent, and the validation percent.
 
 The testing percent is calculated as the remaining percent.
-
 
 ```R
 # Split 60% training 40% testing
@@ -125,25 +118,22 @@ idc$valid
 cat('Testing indices:')
 idc$test
 ```
-
-`Training indices:`
-
-`2 6 7 10 12 13 14 15 17 19 21 22 23 25 26 27 29 30 32 34 36 37 38 39 40 43 44 46 48 49`
-
-`Validation indices:`
-
-`1 5 11 16 18 24 28 31 42 47`
-
-`Testing indices:`
-
-`3 4 8 9 20 33 35 41 45 50`
+<div class="output">
+<pre>
+Training indices:
+2 6 7 10 12 13 14 15 17 19 21 22 23 25 26 27 29 30 32 34 36 37 38 39 40 43 44 46 48 49
+Validation indices:
+1 5 11 16 18 24 28 31 42 47
+Testing indices:
+3 4 8 9 20 33 35 41 45 50
+</pre>
+</div>
 
 ### Combine Training and Validation
 
 Often times, after selecting the optimum model/parameters, you want to retrain the optimum model using the entire training and validation datasets.  Then you test it against the untouched test set to see how well it generalizes to completely new data.
 
 It is easy to recombine the training and validation datasets as one.
-
 
 ```R
 # Combine the training and validation indices
@@ -156,7 +146,9 @@ trval = dummy_df[idc_trval,]
 cat('Combined Training and Validation indices:')
 idc_trval
 ```
-
-`Combined Training and Validation indices:`
-
-`1 2 5 6 7 10 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27 28 29 30 31 32 34 36 37 38 39 40 42 43 44 46 47 48 49`
+<div class="output">
+<pre>
+Combined Training and Validation indices:
+1 2 5 6 7 10 11 12 13 14 15 16 17 18 19 21 22 23 24 25 26 27 28 29 30 31 32 34 36 37 38 39 40 42 43 44 46 47 48 49
+</pre>
+</div>
