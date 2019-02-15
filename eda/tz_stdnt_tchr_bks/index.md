@@ -41,11 +41,9 @@ cat('CSEE data points:', nrow(df_csee))
 	<tr><td>S0239                             </td><td>ST. FRANCIS GIRLS SECONDARY SCHOOL</td><td>MBEYA                             </td><td>MBEYA (M)                         </td><td>MBALIZI RD                        </td><td>PRIVATE                           </td><td>-8.90662                          </td><td>33.4503                           </td><td>100                               </td><td>0                                 </td><td>1.4896                            </td><td>0.0062                            </td><td>YES                               </td><td>2                                 </td><td>2016                              </td><td>2                                 </td><td>1                                 </td><td>1                                 </td></tr>
 </tbody>
 </table>
-<div class="output">
-    <pre>
+<pre class="output">
 CSEE data points: 4360
 </pre>
-</div>
 `End Output`
 
 ```R
