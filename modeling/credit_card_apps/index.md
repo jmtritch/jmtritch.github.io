@@ -135,7 +135,7 @@ a
 A0 : 1.000462
 </pre>
 </div>
-<dl class=dl-horizontal>
+<dl>
 	<dt>A1</dt>
 		<dd>0.00586443791844937</dd>
 	<dt>A2</dt>
