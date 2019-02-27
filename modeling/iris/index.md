@@ -72,72 +72,20 @@ All Predictors:
  Sepal.Length Sepal.Width Petal.Length Petal.Width
 
 All Predictor Combinations:
+
+'Sepal.Length', 'Sepal.Width'
+'Sepal.Length', 'Petal.Length'
+'Sepal.Length', 'Petal.Width'
+'Sepal.Width', 'Petal.Length'
+'Sepal.Width', 'Petal.Width'
+'Petal.Length', 'Petal.Width'
+'Sepal.Length', 'Sepal.Width', 'Petal.Length'
+'Sepal.Length', 'Sepal.Width', 'Petal.Width'
+'Sepal.Length', 'Petal.Length', 'Petal.Width'
+'Sepal.Width', 'Petal.Length', 'Petal.Width'
+'Sepal.Length', 'Sepal.Width', 'Petal.Length', 'Petal.Width'
 </pre>
 </div>
-
-<ol>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Sepal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Petal.Length'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Length'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Petal.Length'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Length'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Petal.Length'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Length'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-	<li><ol class=list-inline>
-	<li>'Sepal.Length'</li>
-	<li>'Sepal.Width'</li>
-	<li>'Petal.Length'</li>
-	<li>'Petal.Width'</li>
-</ol>
-</li>
-</ol>
 
 You can see with four predictors, we have 11 combinations with at least two predictors for k-means clustering.  Let's start to train our model using k-means clustering while adjusting k and the predictor combinations to determine which k value and predictor combination is best overall.  
 
@@ -253,7 +201,7 @@ cat("Best cluster size (k):", kbest)
 </table>
 <div class="output">
 <pre>
-    Best cluster size (k): 3
+Best cluster size (k): 3
 </pre>
 </div>
 
@@ -274,12 +222,11 @@ It is clear from the table above that across nearly all combinations of predicto
 all_species = as.vector(unique(iris_data$Species))
 all_species
 ```
-
-<ol class=list-inline>
-	<li>'setosa'</li>
-	<li>'versicolor'</li>
-	<li>'virginica'</li>
-</ol>
+<div class="output">
+<pre>
+'setosa' 'versicolor' 'virginica'
+</pre>
+</div>
 
 We can see that there are indeed distinct 3 species within the data set.  Great! Our clustering size is promising.  Now we need to determine which predictor combinations are the best for clustering the data.  We want to generate a model using each of the 11 predictor combinations and then calculate the accuracy of the model against the actual classification of the flower type.
 
