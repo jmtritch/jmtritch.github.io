@@ -37,7 +37,7 @@
 
 #### Clustering
 
-- K-means
+- [K-means clustering for flower classification](modeling/iris)
 
 #### Change Detection
 
