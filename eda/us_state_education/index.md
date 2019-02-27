@@ -72,7 +72,13 @@ colnames(df_2015)
 ```
 <div class="output">
 <pre>
-'PRIMARY_KEY' 'STATE' 'YEAR' 'ENROLL' 'TOTAL_REVENUE' 'FEDERAL_REVENUE' 'STATE_REVENUE' 'LOCAL_REVENUE' 'TOTAL_EXPENDITURE' 'INSTRUCTION_EXPENDITURE' 'SUPPORT_SERVICES_EXPENDITURE' 'OTHER_EXPENDITURE' 'CAPITAL_OUTLAY_EXPENDITURE' 'GRADES_PK_G' 'GRADES_KG_G' 'GRADES_4_G' 'GRADES_8_G' 'GRADES_12_G' 'GRADES_1_8_G' 'GRADES_9_12_G' 'GRADES_ALL_G' 'AVG_MATH_4_SCORE' 'AVG_MATH_8_SCORE' 'AVG_READING_4_SCORE' 'AVG_READING_8_SCORE'</li>
+'PRIMARY_KEY' 'STATE' 'YEAR' 'ENROLL' 'TOTAL_REVENUE' 'FEDERAL_REVENUE'
+'STATE_REVENUE' 'LOCAL_REVENUE' 'TOTAL_EXPENDITURE'
+'INSTRUCTION_EXPENDITURE' 'SUPPORT_SERVICES_EXPENDITURE'
+'OTHER_EXPENDITURE' 'CAPITAL_OUTLAY_EXPENDITURE' 'GRADES_PK_G'
+'GRADES_KG_G' 'GRADES_4_G' 'GRADES_8_G' 'GRADES_12_G' 'GRADES_1_8_G'
+'GRADES_9_12_G' 'GRADES_ALL_G' 'AVG_MATH_4_SCORE' 'AVG_MATH_8_SCORE'
+'AVG_READING_4_SCORE' 'AVG_READING_8_SCORE'
 </pre>
 </div>
 
@@ -109,9 +115,9 @@ cat('Total Rows:', nrow(df_2015))
 ```
 <div class="output">
 <pre>
-    Total Rows: 51
-<div class="output">
-<pre>
+Total Rows: 51
+</pre>
+</div>
 
 We have 51 rows, which includes all 50 states and the District of Columbia.  Finally, we will calculate the average score and create an expense per student inteaction term.
 
@@ -202,8 +208,8 @@ analysis[analysis$cooks > 1,]
 <div class="output">
 <pre>
 Cook's Distance identified outliers:
-<div class="output">
-<pre>
+</pre>
+</div>
 
 <table>
 <thead><tr><th></th><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
@@ -241,8 +247,8 @@ analysis[analysis$cooks > 1,]
 <div class="output">
 <pre>
 Cook's Distance identified outliers:
-<div class="output">
-<pre>
+</pre>
+</div>
 
 <table>
 <thead><tr><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
