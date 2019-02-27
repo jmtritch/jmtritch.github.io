@@ -214,7 +214,7 @@ Cook's Distance identified outliers:
 <table>
 <thead><tr><th></th><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
 <tbody>
-	<tr><th scope=row>9</th><td>DISTRICT_OF_COLUMBIA</td><td>242.3215            </td><td>29.48634            </td><td>1.56384             </td><td>9                   </td></tr>
+	<tr><th>9</th><td>DISTRICT_OF_COLUMBIA</td><td>242.3215            </td><td>29.48634            </td><td>1.56384             </td><td>9                   </td></tr>
 </tbody>
 </table>
 
