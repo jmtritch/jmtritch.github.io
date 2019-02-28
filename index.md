@@ -31,7 +31,7 @@
 
 #### Classification
 
-- [Predicting Credit Card Application Approvals](modeling/credit_card_apps)
+- [Predicting credit card application approvals](modeling/credit_card_apps)
 
 #### Clustering
 
