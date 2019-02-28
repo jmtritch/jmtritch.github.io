@@ -302,7 +302,7 @@ options(repr.plot.width=8, repr.plot.height=5)
 ggpairs(df_2015states[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
 ```
 
-![png](output_21_1.png)
+![png](output_23_1.png)
 
 Removing DC from the dataset has more than doubled the correlation between the two variables.
 
