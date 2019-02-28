@@ -1,5 +1,5 @@
 
-# Predicting Credit Card Application Approvals
+# Predicting credit card application approvals
 ---
 The dataset comes from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Credit+Approval).  It has been cleaned to remove categorical variables and data points with missing values.  [Download Here](credit_card_apps.txt)
 
