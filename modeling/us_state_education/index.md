@@ -2,7 +2,7 @@
 # Estimating U.S. examination results from spending per student
 ---
 
-This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  I have already preprocessed the dataset to select the average scores and average spending per student.  You can follow that process in my exploratory analysis:
+This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  I have already preprocessed the dataset to select the average scores and average spending per student.  [Download it here.](states2015.csv)  You can follow that process in my exploratory analysis:
 
 [Is there a relationship between U.S. state spending per student and examination results?](/edu/us_state_education/)
 
