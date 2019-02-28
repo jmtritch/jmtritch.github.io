@@ -2,7 +2,7 @@
 # US State Education Spending and Examination Results
 ---
 
-This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).
+This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  They provide numerous U.S. education datasets following that link.  This exploratory data analysis uses the [states_all.csv](states_all.csv) dataset.
 
 We will be looking at spending and examination results for the 50 states in 2015.  For this analysis, we will only look at how total spending per student affected the total average student scores.
 
