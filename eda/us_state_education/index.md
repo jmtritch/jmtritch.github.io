@@ -220,7 +220,7 @@ Cook's Distance identified outliers:
 
 ![png](output_17_3.png)
 
-The District of Columbia is an outlier.  Let's remove it and keep only the original 50 states.
+The District of Columbia is an outlier.  Let's remove it and keep only the original 50 states.  We will then compute Cook's Distance again and check for any additional outliers.
 
 ```R
 # Remove DC
