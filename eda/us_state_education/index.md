@@ -1,5 +1,5 @@
 
-# US State Education Spending and Examination Results
+# Is there a relationship between U.S. state spending per student and examination results?
 ---
 
 This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  They provide numerous U.S. education datasets following that link.  This exploratory data analysis uses the [states_all.csv](states_all.csv) dataset.

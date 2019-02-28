@@ -20,16 +20,14 @@
 
 ## Exploratory Data Analysis (EDA) <a name="eda"></a>
 
+- [Is there a relationship between U.S. state spending per student and examination results?](/edu/us_state_education)
 - [Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
 
 ## Modeling <a name="model"></a>
 
 #### Regression
 
-- Simple Linear Regression
-- Multiple Linear Regression
-- Variable Selection (Stepwise Regression, Lasso, Elastic Net)
-- Logistic Regression
+- [Estimating U.S. examination results from spending per student](/modeling/us_state_education)
 
 #### Classification
 
