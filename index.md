@@ -21,6 +21,7 @@
 ## Exploratory Data Analysis (EDA) <a name="eda"></a>
 
 - [Is there a relationship between U.S. state spending per student and examination results?](/eda/us_state_education)
+- Imputation: [Working with missing data - Total number of U.S. teachers by state](eda/impute_us_teachers)
 - [Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
 
 ## Modeling <a name="model"></a>
@@ -28,6 +29,7 @@
 #### Regression
 
 - [Estimating U.S. examination results from spending per student](/modeling/us_state_education)
+- [Estimating U.S. examination results from spending per student and average class size](/modeling/us_state_education_multi)
 
 #### Classification
 
