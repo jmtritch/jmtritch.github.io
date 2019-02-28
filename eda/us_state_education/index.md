@@ -161,9 +161,11 @@ ggpairs(df_2015edu[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
 
 ![png](output_13_1.png)
 
+We see that there is small positive correlation (0.14) between spending per student and average test scores.  The scatterplot above also indicates that we should check for outliers within our dataset.
+
 ### Outliers
 
-The scatterplot above indicates that we may have a few outliers within our dataset.  Let's look at the regression line on the full dataset and attempt to identify any outliers.
+Let's look at the regression line on the full dataset and attempt to identify any outliers.
 
 ```R
 # Get the regression line on the full dataset
@@ -289,6 +291,21 @@ ggplot(df_2015edu,aes(x=AVG_TOT_EXP,y=AVG_SCORE, color=OUTLIER)) +
 
 The trend of the regression line after dropping the outlier is in line with the remaining data points much better than the original regression line.  The outlier for the District of Columbia is clearly an influential point.
 
-DC is not a state and it is the capital of the country.  It is clearly not in line with the other states.  It has the most spending per student and the lowest average score of all of the data points.
+DC is not a state and it is the capital of the country. It is clearly not in line with the other states. It has the most spending per student and the lowest average score of all of the data points.
+
+How is the correlation between the two variables affected after removing the District of Columbia?
+
+```R
+# Set the image dimensions
+options(repr.plot.width=8, repr.plot.height=5)
+# Plot the corelations between the attributes
+ggpairs(df_2015states[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
+```
+
+![png](output_23_1.png)
+
+Removing DC from the dataset has more than doubled the correlation between the two variables.
+
+There does appear to be a positively trending relationship between the average spending per student and the average score on examinations.
 
 Let's continue with creating and [evaluating a simple linear regression model using just the states.](/modeling/us_state_education)
