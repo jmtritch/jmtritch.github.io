@@ -304,6 +304,7 @@ ggpairs(df_2015states[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
 
 ![png](output_23_1.png)
 
+
 Removing DC from the dataset has more than doubled the correlation between the two variables.
 
 There does appear to be a positively trending relationship between the average spending per student and the average score on examinations.
