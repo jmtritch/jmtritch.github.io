@@ -20,24 +20,21 @@
 
 ## Exploratory Data Analysis (EDA) <a name="eda"></a>
 
-- [Is there a relationship between U.S. state spending per student and examination results?](/eda/us_state_education)
+- [Is there a relationship between U.S. state spending, enrollment, and examination results?](/eda/us_state_education)
 - [Working with missing data to estimate the total number of U.S. teachers by state](eda/impute_us_teachers)
 - [Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
 
 ## Modeling <a name="model"></a>
 
-#### Regression
-
 - [Estimating U.S. examination results from spending per student](/modeling/us_state_education)
+    - Simple Linear Regression
 - [Estimating U.S. examination results from spending per student and average class size](/modeling/us_state_education_multi)
-
-#### Classification
-
+    - Multiple Linear Regression
 - [Predicting credit card application approvals](modeling/credit_card_apps)
-
-#### Clustering
-
-- [K-means clustering for flower classification](modeling/iris)
+    - Support Vector Machine
+    - K Nearest Neighbor
+- [Clustering for flower petal dimensions](modeling/iris)
+    - K-means Clustering
 
 #### Change Detection
 

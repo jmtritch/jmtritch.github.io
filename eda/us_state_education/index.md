@@ -1,5 +1,5 @@
 
-# Is there a relationship between U.S. state spending per student and examination results?
+# Is there a relationship between U.S. state spending, enrollment, and examination results?
 ---
 
 This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  They provide numerous U.S. education datasets following that link.  This exploratory data analysis uses the [states_all.csv](states_all.csv) dataset.
@@ -132,15 +132,15 @@ df_2015$AVG_SCORE = (df_2015$AVG_MATH_4_SCORE + df_2015$AVG_MATH_8_SCORE +
                         df_2015$AVG_READING_4_SCORE +
                         df_2015$AVG_READING_8_SCORE) / 4
 # Get the total expenditure per student
-df_2015$AVG_TOT_EXP = df_2015$TOTAL_EXPENDITURE / df_2015$ENROLL
+df_2015$STUDENT_EXP = df_2015$TOTAL_EXPENDITURE / df_2015$ENROLL
 
 # Grab only the expenditure per student and the total average score
-df_2015edu = df_2015[c('STATE','AVG_SCORE', 'AVG_TOT_EXP')]
+df_2015edu = df_2015[c('STATE','AVG_SCORE', 'STUDENT_EXP')]
 head(df_2015edu, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th></tr></thead>
+<thead><tr><th>STATE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th></tr></thead>
 <tbody>
 	<tr><td>ALABAMA  </td><td>245.9005 </td><td>10.206890</td></tr>
 	<tr><td>ALASKA   </td><td>247.0921 </td><td>22.701549</td></tr>
@@ -156,7 +156,7 @@ Let's look at the correlation between the average score of a state and the state
 # Set the image dimensions
 options(repr.plot.width=8, repr.plot.height=5)
 # Plot the corelations between the attributes
-ggpairs(df_2015edu[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
+ggpairs(df_2015edu[c('AVG_SCORE', 'STUDENT_EXP')], aes(alpha=0.1))
 ```
 
 ![png](output_13_1.png)
@@ -169,14 +169,14 @@ Let's look at the regression line on the full dataset and attempt to identify an
 
 ```R
 # Get the regression line on the full dataset
-model = lm(AVG_SCORE ~ AVG_TOT_EXP, df_2015edu)
+model = lm(AVG_SCORE ~ STUDENT_EXP, df_2015edu)
 # Get the coefficients
 x0 = model$coeff[[1]]
 x1 = model$coeff[[2]]
 # Create the scatterplot of score vs expenditure
 # with the regression line
 options(repr.plot.width=4, repr.plot.height=3)
-ggplot(df_2015edu,aes(x=AVG_TOT_EXP,y=AVG_SCORE)) +
+ggplot(df_2015edu,aes(x=STUDENT_EXP,y=AVG_SCORE)) +
     geom_point(alpha=0.5) +
     geom_abline(intercept = x0, slope = x1, color='red2') +
     xlab('Average Total Spending per Student') +
@@ -214,7 +214,7 @@ Cook's Distance identified outliers:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
 <tbody>
 	<tr><th>9</th><td>DISTRICT_OF_COLUMBIA</td><td>242.3215            </td><td>29.48634            </td><td>1.56384             </td><td>9                   </td></tr>
 </tbody>
@@ -228,7 +228,7 @@ The District of Columbia is an outlier.  Let's remove it and keep only the origi
 # Remove DC
 df_2015states = df_2015edu[df_2015edu$STATE != 'DISTRICT_OF_COLUMBIA',]
 # Create the new linear regression model
-model2 = lm(AVG_SCORE ~ AVG_TOT_EXP, df_2015states)
+model2 = lm(AVG_SCORE ~ STUDENT_EXP, df_2015states)
 # Set the analysis dataframe
 analysis = df_2015states
 # Set the image dimensions
@@ -253,7 +253,7 @@ Cook's Distance identified outliers:
 </div>
 
 <table>
-<thead><tr><th>STATE</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
+<thead><tr><th>STATE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>cooks</th><th>idx</th></tr></thead>
 <tbody>
 </tbody>
 </table>
@@ -269,11 +269,11 @@ Let's replot the regression line after ignoring the outlier.
 xb0 = model2$coeff[[1]]
 xb1 = model2$coeff[[2]]
 # Specify the outlier
-df_2015edu$OUTLIER = ifelse(df_2015edu$AVG_TOT_EXP > 26, ' Yes', 'No')
+df_2015edu$OUTLIER = ifelse(df_2015edu$STUDENT_EXP > 26, ' Yes', 'No')
 # Create the scatterplot of score vs expenditure
 # with the regression line
 options(repr.plot.width=6, repr.plot.height=4)
-ggplot(df_2015edu,aes(x=AVG_TOT_EXP,y=AVG_SCORE, color=OUTLIER)) +
+ggplot(df_2015edu,aes(x=STUDENT_EXP,y=AVG_SCORE, color=OUTLIER)) +
     geom_point(alpha=0.5) +
     geom_abline(intercept = x0, slope = x1, color='red2') +
     annotate("text", 19, 251.5, label = "Original Regression Line",
@@ -299,7 +299,7 @@ How is the correlation between the two variables affected after removing the Dis
 # Set the image dimensions
 options(repr.plot.width=8, repr.plot.height=5)
 # Plot the corelations between the attributes
-ggpairs(df_2015states[c('AVG_SCORE', 'AVG_TOT_EXP')], aes(alpha=0.1))
+ggpairs(df_2015states[c('AVG_SCORE', 'STUDENT_EXP')], aes(alpha=0.1))
 ```
 
 ![png](output_23_1.png)
