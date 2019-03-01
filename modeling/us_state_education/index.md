@@ -295,9 +295,7 @@ plot_grid(plt_hist, plt_trns, ncol=2)
 
 ![png](output_23_1.png)
 
-The original predictor data was right skewed, and we can see that the transformed data follows more of a normal distribution.  Let's create a model using the transformed predictor.
-
-Let's look at a scatterplot of the transformed data and the corresponding linear regression model.
+The original predictor data was right skewed, and we can see that the transformed data follows more of a normal distribution.  Let's look at a scatterplot of the transformed data and the corresponding linear regression model.
 
 ### Scatterplot of Score vs Inverse Square of Spending
 
