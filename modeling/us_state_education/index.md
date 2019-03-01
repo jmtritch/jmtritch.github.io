@@ -389,8 +389,8 @@ ncvTest(model2)
 Non-constant Variance Score Test
 Variance formula: ~ fitted.values
 Chisquare = 0.7138748, Df = 1, p = 0.39816
-</div>
 </pre>
+</div>
 
 The model passes the NVC Test and we can reasonably conclude that the transformed residuals are normally distributed.  You can also see that the p value increased from 0.30 to 0.40, a 10% increase.
 
