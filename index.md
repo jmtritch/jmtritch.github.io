@@ -21,13 +21,27 @@
 ## Exploratory Data Analysis (EDA) <a name="eda"></a>
 
 - [Is there a relationship between U.S. state spending, enrollment, and examination results?](/eda/us_state_education)
+    - Interaction terms
+    - Cook's Distance and Outliers
 - [Working with missing data to estimate the total number of U.S. teachers by state](eda/impute_us_teachers)
+    - Multiple data sources
+    - Imputation of missing data via regression with perturbations
 - [Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
+    - Multiple data sources
+    - Interaction terms
+    - Shapiro-Wilk test for normality
+    - Multicollinearity
 
 ## Modeling <a name="model"></a>
 
 - [Estimating U.S. examination results from spending per student](/modeling/us_state_education)
     - Simple Linear Regression
+    - Evaluation of Goodness of Fit
+        - Linearity / mean zero assumption
+        - Constant variance assumption
+        - Normality assumption
+        - Independence assumption
+    - Box-Cox Transformation
 - [Estimating U.S. examination results from spending per student and average class size](/modeling/us_state_education_multi)
     - Multiple Linear Regression
 - [Predicting credit card application approvals](modeling/credit_card_apps)
