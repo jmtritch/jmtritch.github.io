@@ -1,5 +1,5 @@
 
-# Working with missing data - Total number of U.S. teachers by state
+# Working with missing data to estimate the total number of U.S. teachers by state
 ---
 
 This dataset comes from the [National Center for Education Statistics](https://nces.ed.gov/surveys/sass/tables/sass1112_2013314_t1s_001.asp), and it includes the total number of teachers by state.  [Download the dataset here](state_teachers_2011-12).  This data was collected during the 2011-2012 School and Staffing Survey.

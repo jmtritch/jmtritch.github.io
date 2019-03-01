@@ -5,7 +5,7 @@
 This dataset comes from Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project).  I have already preprocessed the dataset to select the average scores and average spending per student.  [Download it here.](states2015.csv)  You can follow that process in my exploratory analyses:
 
 1. [Is there a relationship between U.S. state spending per student and examination results?](/edu/us_state_education/)
-2. Imputation: [Working with missing data - Total number of U.S. teachers by state](eda/impute_us_teachers)
+2. [Working with missing data to estimate the total number of U.S. teachers by state](eda/impute_us_teachers)
 
 ## Setting Up
 
