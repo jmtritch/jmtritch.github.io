@@ -22,7 +22,7 @@
 
 - [Is there a relationship between U.S. state spending, enrollment, and examination results?](/eda/us_state_education)
     - Interaction terms
-    - Cook's Distance and Outliers
+    - Cook's Distance and outliers
 - [Working with missing data to estimate the total number of U.S. teachers by state](eda/impute_us_teachers)
     - Multiple data sources
     - Imputation of missing data via regression with perturbations
