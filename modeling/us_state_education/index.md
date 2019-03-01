@@ -352,6 +352,7 @@ $$AVG\_SPENDING = 263.590 - 39.897\ STUDENT\_EXP^{-0.5}$$
 
 Both the intercept and the inverse squared of the average spending per student are significant, with p-values below the accepted $\alpha$ = 0.05 threshold.
 
+
 From the model, a one unit increase in the inverse square of the average student spending, the average student score will decrease by 39.897 points.  Interpreting this in terms of the original student spending is very difficult since it is no longer a linear relationship.
 
 The $R^2$ value has improved slightly from 0.1237 to 0.1388.  Since the model is using the inverse of the square of average student spending, the coefficient has shifted from positive to negative.  Let's check the fit of this new model.
