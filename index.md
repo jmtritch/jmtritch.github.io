@@ -47,8 +47,10 @@
 - [Predicting credit card application approvals](modeling/credit_card_apps)
     - Support Vector Machine
     - K Nearest Neighbor
+    - Training, validation, and testing sets
 - [Clustering for flower petal dimensions](modeling/iris)
     - K-means Clustering
+    - Knee point detection
 
 ### Custom Functions <a name="functions"></a>
 
