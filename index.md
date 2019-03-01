@@ -50,7 +50,7 @@
     - Training, validation, and testing sets
 - [Clustering for flower petal dimensions](modeling/iris)
     - K-means Clustering
-    - Knee point detection
+    - Elbow detection of a curve
 
 ### Custom Functions <a name="functions"></a>
 
