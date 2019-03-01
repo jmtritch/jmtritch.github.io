@@ -34,7 +34,7 @@ Total Rows: 50
 
 <div class="output">
 <pre>
-    States with missing data:
+States with missing data:
 </pre>
 </div>
 
@@ -82,9 +82,9 @@ df_states[df_states$STATE == 'Rhode Island',]
 </tbody>
 </table>
 
-While I could not find the total teacher count for Florida on their government website, but I found the student to teacher ratio across school years on the [Florida Dept. of Education](http://fldoe.org/finance/budget/class-size/class-size-reduction-averages.stml) website.  For the year 2011-2012, the average class sizes were:
+While I could not find the total teacher count for Florida on their government website, but I found the average class size across school years on the [Florida Dept. of Education](http://fldoe.org/finance/budget/class-size/class-size-reduction-averages.stml) website.  For the year 2011-2012, the average class sizes were:
 
-Grades|Size
+Grades|Class Size
 -|-
 PK-3|15.61
 4-8|18.16
@@ -93,17 +93,17 @@ PK-3|15.61
 Let's compute the average of the three to determine the state average.
 
 ```R
-# Calculate the average student-teacher ratio across all grades
+# Calculate the average class size across all grades
 fl_str = (15.61 + 18.16 + 20.08) / 3
-cat('Florida average student to teacher ratio:', fl_str)
+cat('Florida average class size:', fl_str)
 ```
 <div class="output">
 <pre>
-Florida average student to teacher ratio: 17.95
+Florida average class size: 17.95
 </pre>
 </div>
 
-From Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project), we can get the total number of students enrolled in Florida in 2011-2012.  That number is 2,658,559.  Using this number and the student-teacher ratio, we can indirectly compute the total number of teachers.
+From Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project), we can get the total number of students enrolled in Florida in 2011-2012.  That number is 2,658,559.  Using this number and the average class size, we can estimate the total number of teachers.
 
 ```R
 # Calculate the total number of teachers in Florida in 2011-2012
@@ -208,7 +208,7 @@ With the STATES columns matching, we are ready to inner merge them into a single
 
 ```R
 # Merge both the state teachers and state score, expenditure datasets
-df_edu = left_join(df_states, df_enex, by = 'STATE')
+df_edu = left_join(df_states, df_enex, by='STATE')
 # Show the merged dataset
 cat('Total Rows:', nrow(df_edu))
 head(df_edu, 3)
@@ -264,7 +264,7 @@ mod_impreg = lm(TEACHERS ~ ENROLL+AVG_SCORE+AVG_TOT_EXP, df_edu)
 summary(mod_impreg)
 ```
 <div class="output">
-<pre>    
+<pre>
 Call:
 lm(formula = TEACHERS ~ ENROLL + AVG_SCORE + AVG_TOT_EXP, data = df_edu)
 
@@ -383,17 +383,17 @@ head(df_cleaned, 3)
 </tbody>
 </table>
 
-Finally, we will create an interaction term for the student teacher ratio to be used in other analyses.
+Finally, we will create an interaction term for class size that will be used in other analyses.
 
 ```R
-# Calculate the student teacher ratio
-df_cleaned$ST_RATIO = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
+# Calculate the class size
+df_cleaned$CLASS_SIZE = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
 # Show the first rows
 head(df_cleaned, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>ST_RATIO</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>CLASS_SIZE</th></tr></thead>
 <tbody>
 	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>245.9005 </td><td>10.206890</td><td>16.33    </td></tr>
 	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>247.0921 </td><td>22.701549</td><td>17.43    </td></tr>
