@@ -50,27 +50,6 @@
 - [Clustering for flower petal dimensions](modeling/iris)
     - K-means Clustering
 
-#### Change Detection
-
-- CUSUM
-
-#### Time Series
-
-- Exponential Smoothing
-
-#### Trees
-
-- Regression Tree
-- Random Forest
-
-#### Simulation
-
-- Airport
-
-#### Optimization
-
-- Budgeted Nutrition
-
 ### Custom Functions <a name="functions"></a>
 
 #### R
