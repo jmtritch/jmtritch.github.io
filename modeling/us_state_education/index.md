@@ -348,7 +348,7 @@ F-statistic: 7.738 on 1 and 48 DF,  p-value: 0.007706
 </pre>
 </div>
 
-$$AVG\_SPENDING = 263.590 - 39.897\ STUDENT\_EXP^{-0.5}$$
+$$AVG\_SCORE = 263.590 - 39.897\ STUDENT\_EXP^{-0.5}$$
 
 Both the intercept and the inverse squared of the average spending per student are significant, with p-values below the accepted $\alpha$ = 0.05 threshold.
 
