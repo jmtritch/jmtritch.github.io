@@ -4,8 +4,7 @@
 
 The [IRIS](https://archive.ics.uci.edu/ml/datasets/Iris/) dataset is well known in the machine learning community.  It contains 150 observations on three types of flower petals, each with four features and a classification.
 
-Although k-means clustering is an unsupervised learning algorithm, we will attempt to use it to classify of the flower types.
-
+Although k-means clustering is an unsupervised learning algorithm, we will use it to classify flower types in the IRIS dataset.
 
 ```R
 # Import required packages
@@ -89,7 +88,7 @@ All Predictor Combinations:
 
 You can see with four predictors, we have 11 combinations with at least two predictors for k-means clustering.  Let's start to train our model using k-means clustering while adjusting k and the predictor combinations to determine which k value and predictor combination is best overall.  
 
-From Dr. Sokol's lecture, the best k value occurs at the elbow of the slope of the curve in the plot of total distance against cluster size.  This occurs when the point is at the maximum distance from the line that connects the first and last points in the graph, as shown [here](https://stackoverflow.com/questions/2018178/finding-the-best-trade-off-point-on-a-curve/2022348#2022348).
+The "best" k value occurs at the elbow of the of the curve in the plot of total distance against cluster size.  This occurs when the point is at the maximum distance from the line that connects the first and last points in the graph, as shown [here](https://stackoverflow.com/questions/2018178/finding-the-best-trade-off-point-on-a-curve/2022348#2022348).
 
 Let ___ls___ and ___le___ be points on a line.  The closest distance from the point ___p___ to the line is defined as:
 
@@ -114,7 +113,6 @@ dist_to_line = function(point, line_start, line_end) {
     return(distance)
 }
 ```
-
 
 ```R
 set.seed(125)
