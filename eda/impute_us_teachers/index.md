@@ -175,7 +175,8 @@ as.character(df_enex$STATE[grepl('_', df_enex$STATE)])
 
 <div class="output">
 <pre>
-'NEW_HAMPSHIRE' 'NEW_JERSEY' 'NEW_MEXICO' 'NEW_YORK' 'NORTH_CAROLINA' 'NORTH_DAKOTA' 'RHODE_ISLAND' 'SOUTH_CAROLINA' 'SOUTH_DAKOTA'
+'NEW_HAMPSHIRE' 'NEW_JERSEY' 'NEW_MEXICO' 'NEW_YORK' 'NORTH_CAROLINA'
+'NORTH_DAKOTA' 'RHODE_ISLAND' 'SOUTH_CAROLINA' 'SOUTH_DAKOTA'
 'WEST_VIRGINIA'
 </pre>
 </div>
@@ -347,7 +348,7 @@ States with missing data:
 </tbody>
 </table>
 
-Let's substituted the imputed regression with perturbation values into the NA values of the TEACHERS variable.
+Let's substitute the imputed regression with perturbation values into the NA values of the TEACHERS variable.
 
 ```R
 # Set the NaN values to the perturbed values
@@ -392,17 +393,17 @@ head(df_cleaned, 3)
 </tbody>
 </table>
 
-Finally, we will create an interaction term for the student teacher ratio to be used in other analyses.
+Finally, we will create an interaction term for the class size to be used in other analyses.
 
 ```R
 # Calculate the student teacher ratio
-df_cleaned$ST_RATIO = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
+df_cleaned$CLASS_SIZE = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
 # Show the first rows
 head(df_cleaned, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>ST_RATIO</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>CLASS_SIZE</th></tr></thead>
 <tbody>
 	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td><td>16.33    </td></tr>
 	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td><td>17.43    </td></tr>
