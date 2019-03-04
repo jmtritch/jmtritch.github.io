@@ -1,22 +1,27 @@
 
-# Working with missing data to estimate the total number of U.S. teachers by state
+# Working with missing data - Total number of U.S. teachers by state
 ---
 
 This dataset comes from the [National Center for Education Statistics](https://nces.ed.gov/surveys/sass/tables/sass1112_2013314_t1s_001.asp), and it includes the total number of teachers by state.  [Download the dataset here](state_teachers_2011-12).  This data was collected during the 2011-2012 School and Staffing Survey.
 
+
 We can see that some states are missing data:
+
 
 ```R
 # Import the libraries
 suppressMessages(library(dplyr))
+
 # Import the data
 df_states = read.csv('state_teachers_2011-12.csv', header=TRUE)
 cat('Total Rows:', nrow(df_states))
 head(df_states, 3)
+
 # Show the rows missing data
 cat('States with missing data:')
 df_states[is.na(df_states$TEACHERS),]
 ```
+
 <div class="output">
 <pre>
 Total Rows: 50
@@ -62,6 +67,7 @@ Rhode Island has up to date teacher counts on their [InfoWorks!](http://infowork
 # Set the value for Rhode Island
 df_states$TEACHERS = ifelse(df_states$STATE == 'Rhode Island', 15900,
                             df_states$TEACHERS)
+
 head(df_states, 3)
 df_states[df_states$STATE == 'Rhode Island',]
 ```
@@ -82,9 +88,9 @@ df_states[df_states$STATE == 'Rhode Island',]
 </tbody>
 </table>
 
-While I could not find the total teacher count for Florida on their government website, but I found the average class size across school years on the [Florida Dept. of Education](http://fldoe.org/finance/budget/class-size/class-size-reduction-averages.stml) website.  For the year 2011-2012, the average class sizes were:
+While I could not find the total teacher count for Florida on their government website, but I found the student to teacher ratio across school years on the [Florida Dept. of Education](http://fldoe.org/finance/budget/class-size/class-size-reduction-averages.stml) website.  For the year 2011-2012, the average class sizes were:
 
-Grades|Class Size
+Grades|Size
 -|-
 PK-3|15.61
 4-8|18.16
@@ -93,17 +99,17 @@ PK-3|15.61
 Let's compute the average of the three to determine the state average.
 
 ```R
-# Calculate the average class size across all grades
+# Calculate the average student-teacher ratio across all grades
 fl_str = (15.61 + 18.16 + 20.08) / 3
-cat('Florida average class size:', fl_str)
+cat('Florida average student to teacher ratio:', fl_str)
 ```
 <div class="output">
 <pre>
-Florida average class size: 17.95
+Florida average student to teacher ratio: 17.95
 </pre>
 </div>
 
-From Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project), we can get the total number of students enrolled in Florida in 2011-2012.  That number is 2,658,559.  Using this number and the average class size, we can estimate the total number of teachers.
+From Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project), we can get the total number of students enrolled in Florida in 2011-2012.  That number is 2,658,559.  Using this number and the student-teacher ratio, we can indirectly compute the total number of teachers.
 
 ```R
 # Calculate the total number of teachers in Florida in 2011-2012
@@ -111,11 +117,7 @@ fl_teachers = round(2658559 / fl_str, -3)
 cat('Florida teachers in 2011-2012:', fl_teachers)
 ```
 
-<div class="output">
-<pre>
-Florida teachers in 2011-2012: 148000
-</pre>
-</div>
+    Florida teachers in 2011-2012: 148000
 
 There were approximately 148,000 teachers in Florida during the 2011-2012 school year.  Let's add them to our data table.
 
@@ -125,6 +127,7 @@ df_states$TEACHERS = ifelse(df_states$STATE == 'Florida', fl_teachers, df_states
 # Show Florida state
 df_states[df_states$STATE == 'Florida',]
 ```
+
 <table>
 <thead><tr><th></th><th>STATE</th><th>TEACHERS</th></tr></thead>
 <tbody>
@@ -138,19 +141,19 @@ I was unable to find teacher counts from reliable government sources for either 
 
 In one of my other exploratory data analyses, I looked at the relationship between average student national exam scores and average spending per student.  You can check it out [here](/eda/us_state_education).
 
-From that analysis, I have a [cleaned dataset](state_2015_with_enroll.csv) and we can import it here.
+From that analysis, I have a [cleaned dataset](states2015.csv) and we can import it here.
 
 ```R
-df_enex = read.csv('state_2015_with_enroll.csv', header=TRUE)
+df_enex = read.csv('states2015.csv', header=TRUE)
 head(df_enex, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th></tr></thead>
+<thead><tr><th>STATE</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th></tr></thead>
 <tbody>
-	<tr><td>ALABAMA  </td><td>734974   </td><td>245.9005 </td><td>10.206890</td></tr>
-	<tr><td>ALASKA   </td><td>130755   </td><td>247.0921 </td><td>22.701549</td></tr>
-	<tr><td>ARIZONA  </td><td>944978   </td><td>249.0399 </td><td> 8.362734</td></tr>
+	<tr><td>ALABAMA  </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td></tr>
+	<tr><td>ALASKA   </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td></tr>
+	<tr><td>ARIZONA  </td><td>944978   </td><td>7902600  </td><td>249.0399 </td><td> 8.362734</td></tr>
 </tbody>
 </table>
 
@@ -162,22 +165,22 @@ as.character(df_states$STATE[grepl(' ', df_states$STATE)])
 # Show the enroll and expenditure names
 as.character(df_enex$STATE[grepl('_', df_enex$STATE)])
 ```
-
 <div class="output">
 <pre>
 'New Hampshire' 'New Jersey' 'New Mexico' 'New York' 'North Carolina'
 'North Dakota' 'Rhode Island' 'South Carolina' 'South Dakota'
 'West Virginia'
+</pre>
+</div>
 
-'DISTRICT_OF_COLUMBIA' 'NEW_HAMPSHIRE' 'NEW_JERSEY' 'NEW_MEXICO' 'NEW_YORK'
-'NORTH_CAROLINA' 'NORTH_DAKOTA' 'RHODE_ISLAND' 'SOUTH_CAROLINA'
-'SOUTH_DAKOTA' 'WEST_VIRGINIA'
+<div class="output">
+<pre>
+'NEW_HAMPSHIRE' 'NEW_JERSEY' 'NEW_MEXICO' 'NEW_YORK' 'NORTH_CAROLINA' 'NORTH_DAKOTA' 'RHODE_ISLAND' 'SOUTH_CAROLINA' 'SOUTH_DAKOTA'
+'WEST_VIRGINIA'
 </pre>
 </div>
 
 One dataset uses both upper and lower case, and the other uses only upper case.  Also, one dataset uses spaces to separate words and the other uses underscores.  We need both datasets to match.  So let's change the first dataset to use upper case letters and the second data set to use spaces between the words.
-
-You will also notice that District of Columbia is in the second dataset, but that will be dropped as soon as we inner merge the two datasets.  So we don't need to worry about it.
 
 ```R
 # Convert the state names to capital letters and strings for merging
@@ -191,16 +194,19 @@ df_states$STATE[grepl(' ', df_states$STATE)]
 # Show the enroll and expenditure names
 df_enex$STATE[grepl(' ', df_enex$STATE)]
 ```
+<div class="output">
+<pre>
+'NEW HAMPSHIRE' 'NEW JERSEY' 'NEW MEXICO' 'NEW YORK' 'NORTH CAROLINA'
+'NORTH DAKOTA' 'RHODE ISLAND' 'SOUTH CAROLINA' 'SOUTH DAKOTA'
+'WEST VIRGINIA'
+</pre>
+</div>
 
 <div class="output">
 <pre>
 'NEW HAMPSHIRE' 'NEW JERSEY' 'NEW MEXICO' 'NEW YORK' 'NORTH CAROLINA'
 'NORTH DAKOTA' 'RHODE ISLAND' 'SOUTH CAROLINA' 'SOUTH DAKOTA'
 'WEST VIRGINIA'
-
-'DISTRICT OF_COLUMBIA' 'NEW HAMPSHIRE' 'NEW JERSEY' 'NEW MEXICO' 'NEW YORK'
-'NORTH CAROLINA' 'NORTH DAKOTA' 'RHODE ISLAND' 'SOUTH CAROLINA'
-'SOUTH DAKOTA' 'WEST VIRGINIA'
 </pre>
 </div>
 
@@ -208,7 +214,7 @@ With the STATES columns matching, we are ready to inner merge them into a single
 
 ```R
 # Merge both the state teachers and state score, expenditure datasets
-df_edu = left_join(df_states, df_enex, by='STATE')
+df_edu = left_join(df_states, df_enex, by = 'STATE')
 # Show the merged dataset
 cat('Total Rows:', nrow(df_edu))
 head(df_edu, 3)
@@ -224,11 +230,11 @@ Total Rows: 50
 </div>
 
 <table>
-<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th></tr></thead>
 <tbody>
-	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>245.9005 </td><td>10.206890</td></tr>
-	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>247.0921 </td><td>22.701549</td></tr>
-	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>249.0399 </td><td> 8.362734</td></tr>
+	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td></tr>
+	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td></tr>
+	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>7902600  </td><td>249.0399 </td><td> 8.362734</td></tr>
 </tbody>
 </table>
 
@@ -239,10 +245,10 @@ States with missing data:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td>248.9358</td><td>13.82251</td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>250.2656</td><td>15.88227</td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td></tr>
 </tbody>
 </table>
 
@@ -260,13 +266,14 @@ To impute via regression, we must first create a regression model to estimate th
 
 ```R
 # Create the regression model
-mod_impreg = lm(TEACHERS ~ ENROLL+AVG_SCORE+AVG_TOT_EXP, df_edu)
+mod_impreg = lm(TEACHERS ~ ENROLL+AVG_SCORE+STUDENT_EXP, df_edu)
 summary(mod_impreg)
 ```
+
 <div class="output">
-<pre>
+<pre>    
 Call:
-lm(formula = TEACHERS ~ ENROLL + AVG_SCORE + AVG_TOT_EXP, data = df_edu)
+lm(formula = TEACHERS ~ ENROLL + AVG_SCORE + STUDENT_EXP, data = df_edu)
 
 Residuals:
    Min     1Q Median     3Q    Max
@@ -277,7 +284,7 @@ Coefficients:
 (Intercept) -2.625e+05  1.967e+05  -1.334   0.1890    
 ENROLL       5.929e-02  2.664e-03  22.255   <2e-16 ***
 AVG_SCORE    9.939e+02  7.907e+02   1.257   0.2154    
-AVG_TOT_EXP  1.554e+03  7.760e+02   2.003   0.0514 .  
+STUDENT_EXP  1.554e+03  7.760e+02   2.003   0.0514 .  
 ---
 Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -299,6 +306,7 @@ df_edu$TEACH_PRED = round(predict(mod_impreg, df_edu), -2)
 cat('States with missing data:')
 df_edu[is.na(df_edu$TEACHERS),]
 ```
+
 <div class="output">
 <pre>
 States with missing data:
@@ -306,10 +314,10 @@ States with missing data:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>TEACH_PRED</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td>248.9358</td><td>13.82251</td><td>17200   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>250.2656</td><td>15.88227</td><td>62800   </td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td></tr>
 </tbody>
 </table>
 
@@ -332,10 +340,10 @@ States with missing data:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
 </tbody>
 </table>
 
@@ -350,6 +358,7 @@ df_imputed$TEACHERS = ifelse(is.na(df_imputed$TEACHERS), df_imputed$TEACH_PTB,
 cat('States with imputed data:')
 df_imputed[df_imputed$STATE == 'HAWAII' |  df_imputed$STATE == 'MARYLAND',]
 ```
+
 <div class="output">
 <pre>
 States with imputed data:
@@ -357,10 +366,10 @@ States with imputed data:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>16700   </td><td>182384  </td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>65200   </td><td>874108  </td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>16700   </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>65200   </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
 </tbody>
 </table>
 
@@ -375,32 +384,32 @@ head(df_cleaned, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th></tr></thead>
 <tbody>
-	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>245.9005 </td><td>10.206890</td></tr>
-	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>247.0921 </td><td>22.701549</td></tr>
-	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>249.0399 </td><td> 8.362734</td></tr>
+	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td></tr>
+	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td></tr>
+	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>7902600  </td><td>249.0399 </td><td> 8.362734</td></tr>
 </tbody>
 </table>
 
-Finally, we will create an interaction term for class size that will be used in other analyses.
+Finally, we will create an interaction term for the student teacher ratio to be used in other analyses.
 
 ```R
-# Calculate the class size
-df_cleaned$CLASS_SIZE = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
+# Calculate the student teacher ratio
+df_cleaned$ST_RATIO = round(df_cleaned$ENROLL / df_cleaned$TEACHERS, 2)
 # Show the first rows
 head(df_cleaned, 3)
 ```
 
 <table>
-<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>AVG_SCORE</th><th>AVG_TOT_EXP</th><th>CLASS_SIZE</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>ST_RATIO</th></tr></thead>
 <tbody>
-	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>245.9005 </td><td>10.206890</td><td>16.33    </td></tr>
-	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>247.0921 </td><td>22.701549</td><td>17.43    </td></tr>
-	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>249.0399 </td><td> 8.362734</td><td>15.32    </td></tr>
+	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td><td>16.33    </td></tr>
+	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td><td>17.43    </td></tr>
+	<tr><td>ARIZONA  </td><td>61700    </td><td>944978   </td><td>7902600  </td><td>249.0399 </td><td> 8.362734</td><td>15.32    </td></tr>
 </tbody>
 </table>
 
-We have now successfully updated all of the missing TEACHERS values within the dataset.  [Download it here](states_imputed.csv).
+We have now successfully updated all of the missing TEACHERS values within the dataset.
 
 Let's continue with creating and [evaluating a multiple linear regression model of the states to estimate the average student national examination scores.](/modeling/us_state_education_multi)
