@@ -21,11 +21,11 @@ split_indices = function(nrows, trn_pct, val_pct=0.0, seed=NULL) {
         set.seed(seed)
     }
     # Get the training indices
-    trn_idc = sort(sample(1:nrows, floor(nrows*trn_pct)))
+    trn_idc = sort(sample(1:nrows, round(nrows*trn_pct)))
     # Get the non-training indices
     non_trn_idc = setdiff(seq_len(nrows), trn_idc)
     # Get the validation indices
-    val_idc = sort(sample(non_trn_idc, floor(nrows*val_pct)))
+    val_idc = sort(sample(non_trn_idc, round(nrows*val_pct)))
     # Get the remaining testing indices
     tst_idc = setdiff(non_trn_idc, val_idc)
     # Return the list of sets
