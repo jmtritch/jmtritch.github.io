@@ -55,7 +55,7 @@ Total Rows: 50
 </div>
 
 <table>
-<thead><tr><th scope=col>STATE</th><th scope=col>TEACHERS</th><th scope=col>ENROLL</th><th scope=col>TOTAL_EXPENDITURE</th><th scope=col>AVG_SCORE</th><th scope=col>STUDENT_EXP</th><th scope=col>CLASS_SIZE</th></tr></thead>
+<thead><tr><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>CLASS_SIZE</th></tr></thead>
 <tbody>
 	<tr><td>ALABAMA  </td><td>45000    </td><td>734974   </td><td>7501799  </td><td>245.9005 </td><td>10.206890</td><td>16.33    </td></tr>
 	<tr><td>ALASKA   </td><td> 7500    </td><td>130755   </td><td>2968341  </td><td>247.0921 </td><td>22.701549</td><td>17.43    </td></tr>
@@ -306,7 +306,7 @@ Best Alpha value:
 </div>
 
 <table>
-<thead><tr><th scope=col>alpha</th><th scope=col>MSE</th></tr></thead>
+<thead><tr><th>alpha</th><th>MSE</th></tr></thead>
 <tbody>
 	<tr><td>0.1     </td><td>15.35004</td></tr>
 </tbody>
@@ -530,7 +530,7 @@ overall_results
 ```
 
 <table>
-<thead><tr><th scope=col>Optimization</th><th scope=col>Mean.Pct.Error</th><th scope=col>RMSE</th><th scope=col>Predictors</th></tr></thead>
+<thead><tr><th>Optimization</th><th>Mean.Pct.Error</th><th>RMSE</th><th>Predictors</th></tr></thead>
 <tbody>
 	<tr><td>Lasso   </td><td>1.303530</td><td>19.37022</td><td>2       </td></tr>
 	<tr><td>Ridge   </td><td>1.313202</td><td>20.09249</td><td>5       </td></tr>
