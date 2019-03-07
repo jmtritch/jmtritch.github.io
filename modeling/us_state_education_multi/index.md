@@ -171,7 +171,7 @@ lasso_coef
 
 <div class="output">
 <pre>
-    Lasso regression predictors and coefficients:
+Lasso regression predictors and coefficients:
 </pre>
 </div>
 
@@ -229,7 +229,7 @@ ridge_coef
 
 <div class="output">
 <pre>
-    Ridge regression predictors and coefficients:
+Ridge regression predictors and coefficients:
 </pre>
 </div>
 
