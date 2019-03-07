@@ -175,7 +175,7 @@ lasso_coef
 </pre>
 </div>
 
-<dl class=dl-horizontal>
+<dl>
 	<dt>(Intercept)</dt>
 		<dd>252.988112953793</dd>
 	<dt>STUDENT_EXP</dt>
@@ -186,7 +186,7 @@ lasso_coef
 
 Lasso selected spending per student and class size as the optimal predictors for the model.  Let's see how Ridge Regression optimizes the predictors.
 
-## Ridge Regression
+## Ridge Regression - L2 Regularization
 
 Ridge regression is an optimization process that also shrinks coefficients to zero to simplify the model.  However, the coefficients do not actually hit zero.  So it is not really a variable selection process.  It minimizes the sum of squared errors of the model subject to the sum of the squares of the coefficients being less than a threshold value, $\lambda$.
 
@@ -233,7 +233,7 @@ ridge_coef
 </pre>
 </div>
 
-<dl class=dl-horizontal>
+<dl>
 	<dt>(Intercept)</dt>
 		<dd>253.247519867578</dd>
 	<dt>TEACHERS</dt>
@@ -252,9 +252,9 @@ As mentioned above, none of the coefficients were set to zero.
 
 What is interesting to see is that holding all other factors constant, as ENROLL increases, the AVG_SCORE decreases.  This appears to be mostly offset by the TEACHERS predictor however.
 
-## Elastic Net Regression - Combining L1 and L2 Regularization
+## Elastic Net Regression - Balancing L1 and L2 Regularization
 
-Elastic Net Regression balances between Lasso and Ridge regression by combining both.  It minimizes the sum of squared errors of the model subject to the sum of the absolute value of the sum of the squares of the coefficients being less than a threshold value, $\lambda$.
+Elastic Net Regression balances between Lasso and Ridge regression by setting an $\alpha$ value to weigh between both.  It minimizes the sum of squared errors of the model subject to the sum of the absolute value of the sum of the squares of the coefficients being less than a threshold value, $\lambda$.
 
 Given $j=1,..,p$ predictors and $i=1,...,n$ data points:
 
@@ -340,7 +340,7 @@ Elastic Net regression predictors and coefficients:
 </pre>
 </div>
 
-<dl class=dl-horizontal>
+<dl>
 	<dt>(Intercept)</dt>
 		<dd>253.574629514752</dd>
 	<dt>ENROLL</dt>
@@ -714,7 +714,7 @@ There is no hard cutoff of the VIF for determining if there is multicollinearity
 vif(model)
 ```
 
-<dl class=dl-horizontal>
+<dl>
 	<dt>STUDENT_EXP</dt>
 		<dd>1.39407632290324</dd>
 	<dt>CLASS_SIZE</dt>
@@ -727,6 +727,6 @@ We can see that the VIF value is only 1.39, which suggests that we are not seein
 
 The model passes all four assumptions, and we can reasonably conclude that it is a good fit for the data.  With that said, we can see from the low Adjusted $R^2$ value of 0.12 that it is not a very good predictor of average student scores.
 
-### Next Steps
+### Possible Next Step
 
 As a possible next step, we could investigate if there is any statistically significant difference in the results based on the region of the state.
