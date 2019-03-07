@@ -42,7 +42,7 @@
         - Normality assumption
         - Independence assumption
     - Box-Cox Transformation
-- [Estimating U.S. examination results from spending per student and average class size](/modeling/us_state_education_multi)
+- [Estimating U.S. examination results from multiple features](/modeling/us_state_education_multi)
     - Multiple Linear Regression
 - [Predicting credit card application approvals](modeling/credit_card_apps)
     - Support Vector Machine
