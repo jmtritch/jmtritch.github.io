@@ -44,6 +44,10 @@
     - Box-Cox Transformation
 - [Estimating U.S. examination results from multiple features](/modeling/us_state_education_multi)
     - Multiple Linear Regression
+    - Lasso, Ridge, Elastic Net Regression
+    - LP Regularization
+    - Model Evaluation
+    - Variance Inflation Factor
 - [Predicting credit card application approvals](modeling/credit_card_apps)
     - Support Vector Machine
     - K Nearest Neighbor
