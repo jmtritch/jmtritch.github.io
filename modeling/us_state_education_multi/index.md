@@ -128,7 +128,7 @@ yfull = as.vector(df_edu$AVG_SCORE)
 
 ## Lasso - L1 Regularization
 
-Lasso is an optimization process that forces coefficients to zero to simplify the model.  It minimizes the sum of squared errors of the model subject to the sum of the absolute value of the coefficients being less than a threshold value, $\lambda$.
+Lasso is an optimization process that forces coefficients to zero to simplify the model.  It minimizes the sum of squared errors of the model subject to the sum of the absolute value of the coefficients being less than a threshold value, $\lambda$.  An additional benefit of the Lasso model is that it tends to automatically remove multicollinearity by selecting one of the collinear predictors to keep and removing the other.  The downside to this is that you cannot be sure which predictor the algorithm will drop, and there may be a reason to keep on over the other.  For our analysis, we can let Lasso select the predictors to drop without worrying too much about which it selects.
 
 Given $j=1,..,p$ predictors and $i=1,...,n$ data points:
 
@@ -187,7 +187,7 @@ lasso_coef
 		<dd>-0.141196692354634</dd>
 </dl>
 
-Lasso selected spending per student and class size as the optimal predictors for the model.  Let's see how Ridge Regression optimizes the predictors.
+Lasso selected spending per student and class size as the optimal predictors for the model.  Interestingly, the model removed all three predictors that we identified as having high correlation instead of keeping one of them.  Let's see how Ridge Regression optimizes the predictors.
 
 ## Ridge Regression - L2 Regularization
 
