@@ -686,7 +686,11 @@ sw_results <- shapiro.test(analysis$residuals)
 cat('Shapiro-Wilk p-value:', sw_results$p.value)
 ```
 
-    Shapiro-Wilk p-value: 0.0983708
+<div class="output">
+<pre>
+Shapiro-Wilk p-value: 0.0983708
+</pre>
+</div>
 
 With a p-value of 0.1, we do not reject the null hypothesis that the residuals are normally distributed.  However, with it being so close to the $alpha$ threshold of 0.05, the full population are potentially not normally distributed.  It is tough to definitively conclude with so few data points.
 
