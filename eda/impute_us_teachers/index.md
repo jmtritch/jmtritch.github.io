@@ -1,5 +1,5 @@
 
-# Working with missing data - Total number of U.S. teachers by state
+# Working with missing data to estimate the total number of U.S. teachers by state
 ---
 
 This dataset comes from the [National Center for Education Statistics](https://nces.ed.gov/surveys/sass/tables/sass1112_2013314_t1s_001.asp), and it includes the total number of teachers by state.  [Download the dataset here](state_teachers_2011-12).  This data was collected during the 2011-2012 School and Staffing Survey.
@@ -37,6 +37,7 @@ Total Rows: 50
 </tbody>
 </table>
 
+
 <div class="output">
 <pre>
 States with missing data:
@@ -62,6 +63,7 @@ Four states are missing data.  What can we do?
 The best option would be to find the missing data from other sources, but we must be sure to use reliable sources for the data.  Luckily enough, I found reliable sources for two of the missing states.
 
 Rhode Island has up to date teacher counts on their [InfoWorks!](http://infoworks.ride.ri.gov/state/ri) website.  We can see that there are 15,988 registered teachers working in Rhode Island.  This number is likely inflated slightly relative to the 2011-2012 school year, so let's use an even 15,900 teachers for Rhode Island.
+
 
 ```R
 # Set the value for Rhode Island
@@ -111,13 +113,17 @@ Florida average student to teacher ratio: 17.95
 
 From Kaggle's [U.S. Education Datasets: Unification Project](https://www.kaggle.com/noriuk/us-education-datasets-unification-project), we can get the total number of students enrolled in Florida in 2011-2012.  That number is 2,658,559.  Using this number and the student-teacher ratio, we can indirectly compute the total number of teachers.
 
+
 ```R
 # Calculate the total number of teachers in Florida in 2011-2012
 fl_teachers = round(2658559 / fl_str, -3)
 cat('Florida teachers in 2011-2012:', fl_teachers)
 ```
-
-    Florida teachers in 2011-2012: 148000
+<div class="output">
+<pre>
+Florida teachers in 2011-2012: 148000
+</pre>
+</div>
 
 There were approximately 148,000 teachers in Florida during the 2011-2012 school year.  Let's add them to our data table.
 
@@ -165,6 +171,7 @@ as.character(df_states$STATE[grepl(' ', df_states$STATE)])
 # Show the enroll and expenditure names
 as.character(df_enex$STATE[grepl('_', df_enex$STATE)])
 ```
+
 <div class="output">
 <pre>
 'New Hampshire' 'New Jersey' 'New Mexico' 'New York' 'North Carolina'
@@ -195,6 +202,7 @@ df_states$STATE[grepl(' ', df_states$STATE)]
 # Show the enroll and expenditure names
 df_enex$STATE[grepl(' ', df_enex$STATE)]
 ```
+
 <div class="output">
 <pre>
 'NEW HAMPSHIRE' 'NEW JERSEY' 'NEW MEXICO' 'NEW YORK' 'NORTH CAROLINA'
@@ -212,6 +220,7 @@ df_enex$STATE[grepl(' ', df_enex$STATE)]
 </div>
 
 With the STATES columns matching, we are ready to inner merge them into a single dataset.
+
 
 ```R
 # Merge both the state teachers and state score, expenditure datasets
@@ -259,46 +268,46 @@ Now we are ready to impute the missing teacher values for the dataset.  We have 
 2. Using regression to impute the values.
 3. Using regression with perturbation to impute the values.
 
-We will use the third option, as it tends to produce better results overall.
+Regression tends to perform better overall than using the mean.  Adding perturbation could improve results, but given that only two data points are missing, we will simply using regression to impute the values without perturbations.
 
-### Imputing via regression with perturbation
+### Imputing via regression
 
-To impute via regression, we must first create a regression model to estimate the teachers from the other data points.
+To impute via regression, we must first create a regression model to estimate the teachers from the other data points and their corresponding variables.  Since the final response will be AVG_SCORE, we will not include this predictor in the regression model.  If it were included, we would leak some of the response information back into our predictors.  This is a problem and should be avoided.
 
 ```R
 # Create the regression model
-mod_impreg = lm(TEACHERS ~ ENROLL+AVG_SCORE+STUDENT_EXP, df_edu)
+mod_impreg = lm(TEACHERS ~ ENROLL+STUDENT_EXP, df_edu)
 summary(mod_impreg)
 ```
 
 <div class="output">
-<pre>    
+<pre>
 Call:
-lm(formula = TEACHERS ~ ENROLL + AVG_SCORE + STUDENT_EXP, data = df_edu)
+lm(formula = TEACHERS ~ ENROLL + STUDENT_EXP, data = df_edu)
 
 Residuals:
    Min     1Q Median     3Q    Max
--83873  -8247  -1064   8153  58338
+-88176  -6165   -656   6244  55493
 
 Coefficients:
               Estimate Std. Error t value Pr(>|t|)    
-(Intercept) -2.625e+05  1.967e+05  -1.334   0.1890    
-ENROLL       5.929e-02  2.664e-03  22.255   <2e-16 ***
-AVG_SCORE    9.939e+02  7.907e+02   1.257   0.2154    
-STUDENT_EXP  1.554e+03  7.760e+02   2.003   0.0514 .  
+(Intercept) -1.557e+04  1.088e+04  -1.431   0.1593    
+ENROLL       5.867e-02  2.634e-03  22.274   <2e-16 ***
+STUDENT_EXP  1.904e+03  7.290e+02   2.612   0.0122 *  
 ---
 Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 20890 on 44 degrees of freedom
+Residual standard error: 21020 on 45 degrees of freedom
   (2 observations deleted due to missingness)
-Multiple R-squared:  0.9199,	Adjusted R-squared:  0.9145
-F-statistic: 168.5 on 3 and 44 DF,  p-value: < 2.2e-16
+Multiple R-squared:  0.9171,	Adjusted R-squared:  0.9134
+F-statistic: 248.8 on 2 and 45 DF,  p-value: < 2.2e-16
 </pre>
 </div>
 
 We can see that ENROLL is the best predictor of the number of teachers, which makes complete sense given that more students require more teachers.  All predictors have positive coefficients indicating that an increase in any predictor will increase the estimated TEACHERS value.
 
 We will use the model to compute the predicted values and append them to the data frame.
+
 
 ```R
 # Compute the predicted values from the regression model
@@ -307,7 +316,6 @@ df_edu$TEACH_PRED = round(predict(mod_impreg, df_edu), -2)
 cat('States with missing data:')
 df_edu[is.na(df_edu$TEACHERS),]
 ```
-
 <div class="output">
 <pre>
 States with missing data:
@@ -317,43 +325,17 @@ States with missing data:
 <table>
 <thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>21400   </td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>65900   </td></tr>
 </tbody>
 </table>
 
-Finally we will perturb the predictions following a normal distribution.  A standard deviation of 1000 teachers will give us an appropriately sized perturbation.
+Let's substitute the imputed regression values into the NA values of the TEACHERS variable.
 
 ```R
-# Add normally destributed perturbations
-set.seed(1234)
-df_edu$TEACH_PTB <- round(df_edu$TEACH_PRED + rnorm(nrow(df_edu), mean=0,
-                                              sd=1000), -2)
-# Show the rows missing data
-cat('States with missing data:')
-df_edu[is.na(df_edu$TEACHERS),]
-```
-
-<div class="output">
-<pre>
-States with missing data:
-</pre>
-</div>
-
-<table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
-<tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>NA      </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>NA      </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
-</tbody>
-</table>
-
-Let's substitute the imputed regression with perturbation values into the NA values of the TEACHERS variable.
-
-```R
-# Set the NaN values to the perturbed values
+# Set the NaN values to the regression values
 df_imputed = df_edu
-df_imputed$TEACHERS = ifelse(is.na(df_imputed$TEACHERS), df_imputed$TEACH_PTB,
+df_imputed$TEACHERS = ifelse(is.na(df_imputed$TEACHERS), df_imputed$TEACH_PRED,
                             df_imputed$TEACHERS)
 # Show the rows missing data
 cat('States with imputed data:')
@@ -367,10 +349,10 @@ States with imputed data:
 </div>
 
 <table>
-<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th><th>TEACH_PTB</th></tr></thead>
+<thead><tr><th></th><th>STATE</th><th>TEACHERS</th><th>ENROLL</th><th>TOTAL_EXPENDITURE</th><th>AVG_SCORE</th><th>STUDENT_EXP</th><th>TEACH_PRED</th></tr></thead>
 <tbody>
-	<tr><th>11</th><td>HAWAII  </td><td>16700   </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>17200   </td><td>16700   </td></tr>
-	<tr><th>20</th><td>MARYLAND</td><td>65200   </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>62800   </td><td>65200   </td></tr>
+	<tr><th>11</th><td>HAWAII  </td><td>21400   </td><td>182384  </td><td> 2521004</td><td>248.9358</td><td>13.82251</td><td>21400   </td></tr>
+	<tr><th>20</th><td>MARYLAND</td><td>65900   </td><td>874108  </td><td>13882823</td><td>250.2656</td><td>15.88227</td><td>65900   </td></tr>
 </tbody>
 </table>
 
@@ -379,7 +361,7 @@ We can now drop the extra columns that we created to impute the data.
 ```R
 # Drop the imputation columns
 df_cleaned = df_imputed[ ,!(names(df_imputed) %in%
-                             c('TEACH_PRED','TEACH_PTB'))]
+                             c('TEACH_PRED'))]
 # Show the first rows
 head(df_cleaned, 3)
 ```
