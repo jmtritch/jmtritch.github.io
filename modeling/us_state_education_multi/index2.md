@@ -83,13 +83,13 @@ ggpairs(df_edu[c('TEACHERS', 'ENROLL', 'TOTAL_EXPENDITURE', 'STUDENT_EXP',
                  'CLASS_SIZE', 'AVG_SCORE')], aes(alpha=0.1))
 ```
 
-![png](output_3_0.png)
+![png](output_3_1.png)
 
 There appears to be some multicollinearity between predictors.  Specifically, ENROLL, TEACHERS, and TOTAL_EXPENDITURE:
 
 Pred A|Pred B|Correlation
 -|-|-
-ENROLL|TEACHERS|0.951
+ENROLL|TEACHERS|0.952
 ENROLL|TOTAL_EXPENDITURE|0.937
 TOTAL_EXPENDITURE|TEACHERS|0.954
 
@@ -97,15 +97,15 @@ This makes senses considering that states with more students need more teachers 
 
 When creating our models, we will want to check for multicollinearity as it could affect the independence of the residuals of our model.
 
-## Training and Validation
+## Training and Validation Sets
 
-Before creating our multiple linear regression models, we will split the data into 82% training with cross-validation and 18% validation set.  I am using a [function](functions/split_indices) that I created to split the data.
+Before creating our multiple linear regression models, we will split the data into 80% training and 20% validation sets.  I am using a [function](functions/split_indices) that I created to split the data.
 
 This will enable us to see how well the models generalize to new data and select the best model accordingly.
 
 ```R
 # Get the indices for the training, validation, and testing sets
-idc = split_indices(nrow(df_edu), 0.82, 0.18, seed=seed)
+idc = split_indices(nrow(df_edu), 0.8, 0.2, seed=seed)
 
 # Set the training, validation, and testing sets
 train = df_edu[idc$train,]
@@ -144,16 +144,13 @@ $$\Sigma_{j=1}^p |a_j| \leq \lambda$$
 
 Note: The data need to be standardized for Lasso to work.  Fortunately, the `glmnet()` function provides a parameter for standardizing the data automatically.
 
-We will also initially use cross-validation with 10 folds to find the optimal lambda value for the lasso regression model.
-
-
 ```R
 # Set our seed value
 set.seed(seed)
 
 # Use Cross-validation to find the optimal lambda range
 cv_lasso = cv.glmnet(xtrain, ytrain, family="gaussian", type.measure="mse",
-                     alpha=1, standardize=TRUE, nfolds=10)
+                     alpha=1, standardize=TRUE)
 
 # Train the Lasso model on the entire training set using the optimal lambda
 lm_lasso = glmnet(xtrain, ytrain, family ="gaussian", alpha=1,
@@ -174,17 +171,17 @@ lasso_coef
 
 <div class="output">
 <pre>
-    Lasso regression predictors and coefficients:
+Lasso regression predictors and coefficients:
 </pre>
 </div>
 
 <dl>
 	<dt>(Intercept)</dt>
-		<dd>251.439438654396</dd>
+		<dd>252.988112953793</dd>
 	<dt>STUDENT_EXP</dt>
-		<dd>0.197879513860374</dd>
+		<dd>0.178615527445116</dd>
 	<dt>CLASS_SIZE</dt>
-		<dd>-0.141196692354634</dd>
+		<dd>-0.23087589247921</dd>
 </dl>
 
 Lasso selected spending per student and class size as the optimal predictors for the model.  Let's see how Ridge Regression optimizes the predictors.
@@ -204,8 +201,6 @@ $$\Sigma_{i=1}^n (y_i - \hat{y}_i)$$
 Subject to:
 
 $$\Sigma_{j=1}^p a_j^2 \leq \lambda$$
-
-Similar to the Lasso regression we performed above, we will initially use cross-validation with 10 folds to find the optimal lambda value for the ridge regression model.
 
 ```R
 # Set our seed value
@@ -234,27 +229,28 @@ ridge_coef
 
 <div class="output">
 <pre>
-    Ridge regression predictors and coefficients:
+Ridge regression predictors and coefficients:
 </pre>
 </div>
 
 <dl>
 	<dt>(Intercept)</dt>
-		<dd>252.638987135498</dd>
+		<dd>253.247519867578</dd>
 	<dt>TEACHERS</dt>
-		<dd>6.9036828659554e-07</dd>
+		<dd>7.87785727398363e-07</dd>
 	<dt>ENROLL</dt>
-		<dd>1.54733180611656e-08</dd>
+		<dd>2.4988816521527e-08</dd>
 	<dt>TOTAL_EXPENDITURE</dt>
-		<dd>3.65136450687122e-09</dd>
+		<dd>2.89882741239528e-09</dd>
 	<dt>STUDENT_EXP</dt>
-		<dd>0.128361336619334</dd>
+		<dd>0.134873755454632</dd>
 	<dt>CLASS_SIZE</dt>
-		<dd>-0.16574255968695</dd>
+		<dd>-0.213030660881126</dd>
 </dl>
 
+As mentioned above, none of the coefficients were set to zero.
 
-As mentioned above, none of the coefficients were set to zero, although some shrank to nearly zero, like TOTAL_EXPENDITURE.
+What is interesting to see is that holding all other factors constant, as ENROLL increases, the AVG_SCORE decreases.  This appears to be mostly offset by the TEACHERS predictor however.
 
 ## Elastic Net Regression - Balancing L1 and L2 Regularization
 
@@ -302,22 +298,23 @@ plot(alpha_cost)
 title('MSE as a function of Alpha in Elastic Net Model Training')
 
 ```
+
 <div class="output">
 <pre>
-    Best Alpha value:
+Best Alpha value:
 </pre>
 </div>
 
 <table>
 <thead><tr><th>alpha</th><th>MSE</th></tr></thead>
 <tbody>
-	<tr><td>0.1     </td><td>15.11482</td></tr>
+	<tr><td>0.1     </td><td>15.35004</td></tr>
 </tbody>
 </table>
 
 ![png](output_11_2.png)
 
-Using MSE as the cost function, the "best" α value is 0.1. This suggests that the Elastic Net model most favors shrinking the coefficients, rather than zeroing them out. I would expect that with an α value so near to zero, very few predictors will be removed from the model.
+Using MSE as the cost function, the "best" α value is 0.1. This suggests that the Elastic Net model most favors shrinking the coefficients, rather than zeroing them out. I would expect that with an α value so near to zero, no predictors will be removed from the model.
 
 ```R
 # Train the elast model on the entire training set using the optimal lambda
@@ -345,16 +342,16 @@ Elastic Net regression predictors and coefficients:
 
 <dl>
 	<dt>(Intercept)</dt>
-		<dd>252.31124507424</dd>
+		<dd>253.574629514752</dd>
 	<dt>ENROLL</dt>
-		<dd>1.71559311641553e-07</dd>
+		<dd>2.39209643201802e-07</dd>
+	<dt>TOTAL_EXPENDITURE</dt>
+		<dd>-3.97412352810693e-09</dd>
 	<dt>STUDENT_EXP</dt>
-		<dd>0.241692426336499</dd>
+		<dd>0.225802914460005</dd>
 	<dt>CLASS_SIZE</dt>
-		<dd>-0.261472222409059</dd>
+		<dd>-0.334408781346008</dd>
 </dl>
-
-The Elastic Net regression model removed two predictors, namely TOTAL_EXPENDITURE and TEACHERS.
 
 ## Brief Review of LP-Norm Regularization
 
@@ -409,7 +406,7 @@ ggplot(normalized, aes(xn,yn,color=p)) +
     geom_point(size = 0.5)
 ```
 
-![png](output_15_0.png)
+![png](output_15_1.png)
 
 When p=1, we have a rotated square, with vertices at (0,1), (1,0), (-1,0), and (0,-1).
 
@@ -423,7 +420,7 @@ Now that we have the three models:
 2. Ridge
 3. Elastic Net
 
-Let's select the best model by comparing their relative performance on the cross-validation set.
+Let's select the best model by comparing their relative performance on the validation set.
 
 ```R
 # Validate the Lasso Model
@@ -513,7 +510,7 @@ ggplot(crime_rates, aes(x=Point, y=AVG_SCORE, col=Source)) +
     ggtitle('Actual and Predicted Exam Scores')
 ```
 
-![png](output_21_0.png)
+![png](output_21_1.png)
 
 ```R
 # Show the box plot of the Percent Error
@@ -525,7 +522,7 @@ ggplot(errors, aes(x='', y=Pct.Error, col=Optimization)) +
     ggtitle('Box Plot of Percent Error')
 ```
 
-![png](output_22_0.png)
+![png](output_22_1.png)
 
 ```R
 # Show the results
@@ -535,9 +532,9 @@ overall_results
 <table>
 <thead><tr><th>Optimization</th><th>Mean.Pct.Error</th><th>RMSE</th><th>Predictors</th></tr></thead>
 <tbody>
-	<tr><td>Lasso   </td><td>1.363190</td><td>21.52679</td><td>2       </td></tr>
-	<tr><td>Ridge   </td><td>1.368184</td><td>22.26223</td><td>5       </td></tr>
-	<tr><td>Elastic </td><td>1.455956</td><td>22.63956</td><td>3       </td></tr>
+	<tr><td>Lasso   </td><td>1.303530</td><td>19.37022</td><td>2       </td></tr>
+	<tr><td>Ridge   </td><td>1.313202</td><td>20.09249</td><td>5       </td></tr>
+	<tr><td>Elastic </td><td>1.397516</td><td>20.63286</td><td>4       </td></tr>
 </tbody>
 </table>
 
@@ -551,31 +548,31 @@ summary(model)
 ```
 
 <div class="output">
-<pre>
+<pre>    
 Call:
 lm(formula = AVG_SCORE ~ STUDENT_EXP + CLASS_SIZE, data = df_edu)
 
 Residuals:
     Min      1Q  Median      3Q     Max
--6.7671 -2.6276  0.3014  1.6032  8.4852
+-6.4404 -2.6728  0.2273  1.5927  8.4468
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept) 252.5058     4.6612  54.172   <2e-16 ***
-STUDENT_EXP   0.2592     0.1587   1.633    0.109    
-CLASS_SIZE   -0.2599     0.2257  -1.152    0.255    
+(Intercept) 253.4486     4.7767  53.060   <2e-16 ***
+STUDENT_EXP   0.2413     0.1593   1.514    0.137    
+CLASS_SIZE   -0.3095     0.2322  -1.333    0.189    
 ---
 Signif. codes:  0 ‘ *** ’ 0.001 ‘ ** ’ 0.01 ‘ * ’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 3.929 on 47 degrees of freedom
-Multiple R-squared:  0.1478,	Adjusted R-squared:  0.1115
-F-statistic: 4.075 on 2 and 47 DF,  p-value: 0.02332
+Residual standard error: 3.91 on 47 degrees of freedom
+Multiple R-squared:  0.1557,	Adjusted R-squared:  0.1197
+F-statistic: 4.333 on 2 and 47 DF,  p-value: 0.01875
 </pre>
 </div>
 
-$$AVG\_SCORE = 252.51 + 0.26\ STUDENT\_EXP - 0.26\ CLASS\_SIZE$$
+$$AVG\_SCORE = 253.45 + 0.24\ STUDENT\_EXP - 0.31\ CLASS\_SIZE$$
 
-We can see that for a 1 student increase in average class size, holding spending per student constant, the average score decreases by 0.26 points.  Holding class size constant, as spending per student increases by USD 1,000, the average score increases by 0.26.
+We can see that for a 1 student increase in average class size, holding spending per student constant, the average score decreases by 0.31 points.  Holding class size constant, as spending per student increases by USD 1,000, the average score increases by 0.24.
 
 Additionally, we can see that neither predictor is significant with p-values above the the $\alpha$ threshold of 0.05.
 
@@ -614,7 +611,7 @@ plt_mar = ggplot(analysis, aes(x=CLASS_SIZE, y=AVG_SCORE)) +
 plot_grid(plt_occ, plt_mar, ncol=2)
 ```
 
-![png](output_27_0.png)
+![png](output_27_1.png)
 
 The linearity/mean zero assumption appears to hold.  Spending per student appears to trend linearly positively with average score, and class size appears to trend linearly negatively with average score.
 
@@ -634,8 +631,7 @@ geom_point(shape=1, color='red3') +
     ggtitle("Residual Plot")
 ```
 
-![png](output_29_0.png)
-
+![png](output_29_1.png)
 
 The variance of the residuals against the fitted values appears to be constant.  Let's run the Non-constant variance test on the model to check it algorithmically.
 
@@ -647,11 +643,11 @@ ncvTest(model)
 <pre>
 Non-constant Variance Score Test
 Variance formula: ~ fitted.values
-Chisquare = 0.1409538, Df = 1, p = 0.70733
+Chisquare = 0.3697145, Df = 1, p = 0.54316
 </pre>
 </div>
 
-With a p-value of 0.71, we can reasonably conclude that the residuals have constant variance.
+With a p-value of 0.54, we can reasonably conclude that the residuals have constant variance.
 
 ### Normality Assumption $\epsilon \sim N(0,\sigma^2)$
 
@@ -668,7 +664,7 @@ plt_qq = ggplot(analysis, aes(sample=residuals)) +
     ggtitle("Q-Q Plot")
 # Histogram of Residuals
 plt_hst = ggplot(analysis, aes(residuals)) +
-    geom_histogram(bins=10, color='darkorange') +
+    geom_histogram(bins=9, color='darkorange') +
     xlab('Residuals') +
     ylab('Count') +
     ggtitle("Histogram of the Residuals")
@@ -676,9 +672,9 @@ plt_hst = ggplot(analysis, aes(residuals)) +
 plot_grid(plt_qq, plt_hst, ncol=2)
 ```
 
-![png](output_33_0.png)
+![png](output_33_1.png)
 
-The Q-Q plot indicates that there is are light positive and negative tails.  The histogram of the residuals also confirms that it has a light negative tail.  Let's run the Shapiro-Wilk test on the residuals to see if they are normally distributed.
+The Q-Q plot indicates that there is a light negative tail.  The histogram of the residuals also confirms that it has a light negative tail.  Let's run the Shapiro-Wilk test on the residuals to see if they are normally distributed.
 
 ```R
 # Run the Shapiro Test
@@ -686,9 +682,13 @@ sw_results <- shapiro.test(analysis$residuals)
 cat('Shapiro-Wilk p-value:', sw_results$p.value)
 ```
 
-    Shapiro-Wilk p-value: 0.0983708
+<div class="output">
+<pre>
+Shapiro-Wilk p-value: 0.06858472
+</pre>
+</div>
 
-With a p-value of 0.1, we do not reject the null hypothesis that the residuals are normally distributed.  However, with it being so close to the $alpha$ threshold of 0.05, the full population are potentially not normally distributed.  It is tough to definitively conclude with so few data points.
+With a p-value of 0.07, we do not reject the null hypothesis that the residuals are normally distributed.  However, with it being so close to the $alpha$ threshold of 0.5, the full population are potentially not normally distributed.
 
 ### Independence Assumption $\epsilon_i,...,\epsilon_n$ are independent
 
@@ -700,7 +700,7 @@ cor(analysis$STUDENT_EXP, analysis$CLASS_SIZE)
 
 <div class="output">
 <pre>
--0.519945387765326
+-0.531675802778805
 </pre>
 </div>
 
@@ -716,16 +716,16 @@ vif(model)
 
 <dl>
 	<dt>STUDENT_EXP</dt>
-		<dd>1.37050735164427</dd>
+		<dd>1.39407632290324</dd>
 	<dt>CLASS_SIZE</dt>
-		<dd>1.37050735164427</dd>
+		<dd>1.39407632290324</dd>
 </dl>
 
-We can see that the VIF value is only 1.37, which suggests that we are not seeing significant multicollinearity between the two predictors.  We can reasonably conclude that the independence assumption holds.
+We can see that the VIF value is only 1.39, which suggests that we are not seeing significant multicollinearity between the two predictors.  We can reasonably conclude that the independence assumption holds.
 
 ## Conclusions
 
-The model passes all four assumptions, and we can reasonably conclude that it is a good fit for the data.  With that said, we can see from the low Adjusted $R^2$ value of 0.11 that it is not a very good predictor of average student scores.
+The model passes all four assumptions, and we can reasonably conclude that it is a good fit for the data.  With that said, we can see from the low Adjusted $R^2$ value of 0.12 that it is not a very good predictor of average student scores.
 
 ### Possible Next Step
 
