@@ -25,7 +25,7 @@
     - Cook's Distance and outliers
 - [Working with missing data to estimate the total number of U.S. teachers by state](eda/impute_us_teachers)
     - Multiple data sources
-    - Imputation of missing data via regression with perturbations
+    - Imputation of missing data via regression
 - [Is there a relationship between Tanzanian school performance on the Form IV National Exams and student access to textbooks and teachers?](eda/tz_stdnt_tchr_bks)
     - Multiple data sources
     - Interaction terms
